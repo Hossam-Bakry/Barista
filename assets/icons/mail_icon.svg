@@ -1,0 +1,17 @@
+<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <g id="sms-notification" transform="translate(-684 -252)">
+        <path d="M0,5C0,1.5,2,0,5,0h7" fill="none" id="Vector" stroke="#292d32"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(686 255.5)" />
+        <path d="M20,0V5c0,3.5-2,5-5,5H5C2,10,0,8.5,0,5V2.48" data-name="Vector" fill="none"
+            id="Vector-2" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" transform="translate(686 262.5)" />
+        <path d="M0,0,3.13,2.5a3.166,3.166,0,0,0,3.75,0l1.18-.94" data-name="Vector" fill="none"
+            id="Vector-3" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" transform="translate(691 261)" />
+        <path d="M5,2.5A2.5,2.5,0,1,1,2.5,0,2.5,2.5,0,0,1,5,2.5Z" data-name="Vector" fill="none"
+            id="Vector-4" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" transform="translate(701 255)" />
+        <path d="M0,0H24V24H0Z" data-name="Vector" fill="none" id="Vector-5"
+            opacity="0" transform="translate(684 252)" />
+    </g>
+</svg>

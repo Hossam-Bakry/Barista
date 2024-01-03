@@ -1,0 +1,98 @@
+name: barista
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.2+9
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  # Loading indecator while data is retrived
+  shimmer: ^2.0.0
+  # Transaltions
+  easy_localization: ^3.0.3
+  # Page Indicator
+  smooth_page_indicator: ^1.0.0+2
+  # Provider Package
+  provider: ^6.0.4
+  # fading animations
+  animate_do: ^3.0.2
+  lottie: ^2.6.0
+  # contact animated card
+  flutter_bounceable: ^1.1.0
+  # loading button
+  progress_state_button: ^1.0.4
+  # Handling network requests
+  dio: ^4.0.6
+  # Easy Loading
+  #  flutter_easyloading: ^3.0.4
+  # Show Message in Screens
+  fluttertoast: ^8.1.1
+  # Functional Programming
+  dartz: ^0.10.1
+  # dart object creator
+  equatable: ^2.0.5
+  # Snack Bar
+  bot_toast: ^4.0.3
+  # Pin Code Fields
+  pinput: ^3.0.1
+  # timer
+  timer_count_down: ^2.2.2
+  intl: ^0.18.0
+  flutter_svg: ^1.0.1
+  flutter_staggered_grid_view: ^0.4.0
+  # Easy Loading
+  flutter_easyloading:
+    path: ../flutter_easyloadig-3.0.5
+  # App Icon
+  flutter_launcher_icons: ^0.13.1
+  # Animation Options
+  expandable_fab_lite: ^0.0.2
+  # Drop Down Options IOS
+  dropdown_cupertino: ^0.0.8
+  # Toggle Button
+  toggle_switch: ^2.1.0
+  lite_rolling_switch: ^1.0.1
+  circular_chart_flutter: ^0.0.2
+  sleek_circular_slider: ^2.0.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/icons/
+    - assets/translations/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Bold.ttf
+        - asset: assets/fonts/Inter-SemiBold.ttf
+        - asset: assets/fonts/Inter-Medium.ttf
+        - asset: assets/fonts/Inter-Medium.ttf
+        - asset: assets/fonts/Inter-Regular.ttf
