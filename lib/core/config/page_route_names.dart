@@ -8,4 +8,8 @@ class PageRouteNames {
   static const String home = "home";
   static const String brewMethodDetails = "brewMethodDetails";
   static const String brewPlay = "brewPlay";
+  static const String brewDonePage = "brewDonePage";
+  static const String profileData = "profileData";
+  static const String editProfileData = "editProfileData";
+  static const String ownRecipeRateView = "oenRecipeRateView";
 }

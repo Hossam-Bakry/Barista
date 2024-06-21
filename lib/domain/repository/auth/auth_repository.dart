@@ -5,7 +5,7 @@ import '../../entities/auth/register_request_data.dart';
 import '../../entities/auth/register_response.dart';
 
 abstract class AuthRepository {
-  Future<Either<ServerFailure, bool>> login(String email, String password);
+  Future<Either<ServerFailure, String>> login(String email, String password);
 
   Future<Either<ServerFailure, RegisterResponse>> register(
       RegisterRequestData data);

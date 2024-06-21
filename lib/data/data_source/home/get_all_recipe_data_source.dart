@@ -7,7 +7,7 @@ class GetAllRecipesDataSource {
 
   Future<Response> getAllRecipes() async {
     return await _dio.get(
-      "/api/v1/Coffee/recipe",
+      "api/v1/Coffee/recipe",
     );
   }
 }

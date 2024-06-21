@@ -6,12 +6,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'core/config/providers.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
+void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -22,16 +23,23 @@ void main() {
       startLocale: const Locale("en"),
       fallbackLocale: const Locale("en"),
       useOnlyLangCode: true,
-      child: const MyApp(),
+      child: Phoenix(
+        child: const MyApp(),
+      ),
     ),
   );
 
   configLoading();
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -54,3 +62,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

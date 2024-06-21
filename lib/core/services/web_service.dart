@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/constants.dart';
 
@@ -29,6 +30,7 @@ class WebServices {
 
   String? mytoken;
   String mobile = "";
+  final String storageKeyMobileToken = "Authorization";
 
   WebServices._() {
     freeDio.options.connectTimeout = 30000;
@@ -37,9 +39,25 @@ class WebServices {
     tokenDio.options.connectTimeout = 30000;
     tokenDio.options.baseUrl = Constants.baseURL;
     initializeInterceptors();
+
+    //   (freeDio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //       (clnt) {
+    //     SecurityContext context = SecurityContext();
+    //     var client = HttpClient(context: context);
+    //     client.badCertificateCallback = (cert, host, port) => true;
+    //     return client;
+    //   };
+    //
+    //   (tokenDio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //       (clnt) {
+    //     SecurityContext context = SecurityContext();
+    //     var client = HttpClient(context: context);
+    //     client.badCertificateCallback = (cert, host, port) => true;
+    //     return client;
+    //   };
   }
 
-  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   ///-----------------------------------
   /// Initialize language
@@ -98,6 +116,32 @@ class WebServices {
     return;
   }*/
 
+  /// Method that saves the token in Shared Preferences
+
+  Future<bool> setMobileToken(String? token) async {
+    mytoken = token;
+    final SharedPreferences prefs = await _prefs;
+    if (token == null) {
+      prefs.remove("Authorization");
+      return Future<bool>.value(false);
+    } else {
+      return prefs.setString("Authorization", token);
+    }
+  }
+
+  Future<String?> getMobileToken() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getString("Authorization");
+  }
+
+  /// ----------------------------------------------------------
+  /// initialize tokens
+
+  Future<void> initializeToken() async {
+    mytoken = await getMobileToken();
+    return;
+  }
+
   initializeInterceptors() {
     // Clearing Interceptors
     freeDio.interceptors.clear();
@@ -109,15 +153,9 @@ class WebServices {
         onRequest: (options, handler) {
           options.headers["Accept-Language"] =
               navigatorKey.currentContext!.locale;
-          // options.headers['app_version'] = deviceInformation.appVersion;
-          // options.headers['platform'] = deviceInformation.platform;
-          // options.headers['device_token'] = deviceInformation.fcmToken;
-          // options.headers['thirdParty'] = deviceInformation.thirdParty;
-          // options.headers['lang'] = lang;
-          // options.headers['accId'] = Constants.accountID;
 
           debugPrint(
-              'send request：path:${options.path}，baseURL:${options.baseUrl}');
+              'send request：baseURL:${options.baseUrl} path:${options.path}，');
           debugPrint('headers: ${options.headers}');
           debugPrint('query parameters: ${options.queryParameters}');
           debugPrint('data: ${options.data}');
@@ -165,21 +203,17 @@ class WebServices {
         },
       ),
     );
-    // tokenDio Interceptors
-    /*tokenDio.interceptors.add(
+
+    tokenDio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-         */ /* if (options.path != "digitalapi/profile/digitalBE/token/resetData")
+          if (options.path != "digitalapi/profile/digitalBE/token/resetData")
             // EasyLoading.show();
             // Do something before request is sent
-            options.headers['device_id'] = deviceInformation.deviceId;
-          options.headers['app_version'] = deviceInformation.appVersion;
-          options.headers['platform'] = deviceInformation.platform;
-          options.headers['device_token'] = deviceInformation.fcmToken;
-          options.headers['thirdParty'] = deviceInformation.thirdParty;
-          options.headers['accId'] = Constants.accountID;
-          options.headers[storageKeyMobileToken] = "Bearer $mytoken";
-*/ /*
+            options.headers["Accept-Language"] =
+                navigatorKey.currentContext!.locale;
+          options.headers["Authorization"] = "Bearer $mytoken";
+
           debugPrint(
               'send request path:${options.path}，baseURL:${options.baseUrl}');
           debugPrint("method: ${options.method}");
@@ -212,89 +246,9 @@ class WebServices {
           debugPrint("message ${e.message}");
           debugPrint("type ${e.type}");
 
-          if (e.response != null) {
-            if (e.response!.statusCode == 401) {
-              return handler.next(e);
-            } else if (e.response!.statusCode == 403) {
-              debugPrint("unAutherized");
-              RequestOptions options = e.response!.requestOptions;
-              if ("Bearer" + mytoken! !=
-                  options.headers[storageKeyMobileToken]) {
-                options.headers[storageKeyMobileToken] = "Bearer" + mytoken!;
-
-                //repate
-                debugPrint("repeat");
-                debugPrint(options.headers[storageKeyMobileToken]);
-                debugPrint("token from interseptos: $mytoken");
-
-                // handler.resolve(
-                //   await tokenDio.request(
-                //     options.path,
-                //     data: options.data,
-                //     options: Options(
-                //       method: options.method,
-                //       headers: options.headers,
-                //     ),
-                //   ),
-                // );
-              }
-
-              tokenDio.lock();
-              tokenDio.interceptors.responseLock.lock();
-              tokenDio.interceptors.errorLock.lock();
-
-              debugPrint("Refresh");
-              freeDio
-                  .post(
-                "digitalapi/profile/digitalBE/token/refreshtoken",
-                options: Options(headers: {
-                  "deadToken": mytoken,
-                }),
-              )
-                  .then((res) async {
-                if (res.statusCode == 200) {
-                  mytoken = res.data;
-                  await setMobileToken(res.data);
-                  // handler.
-                }
-              }).catchError((error) async {
-                debugPrint("error while refresh");
-                debugPrint(error);
-                debugPrint(error.response);
-                mytoken = null;
-                await setMobileToken(null);
-              }).whenComplete(() {
-                tokenDio.unlock();
-                tokenDio.interceptors.responseLock.unlock();
-                tokenDio.interceptors.errorLock.unlock();
-              }).then((value) async {
-                //repeat'
-                debugPrint("repeat after refresh");
-                handler.resolve(
-                  await tokenDio.request(
-                    options.path,
-                    data: options.data,
-                    options: Options(
-                      method: options.method,
-                      headers: options.headers,
-                    ),
-                  ),
-                );
-              });
-            } else {
-              debugPrint("unExpected");
-              ToastService.showUnExpectedErrorToast();
-              handler.next(e);
-            }
-          } else {
-            debugPrint("No Connection");
-            debugPrint(e.requestOptions.path);
-            debugPrint(e.toString());
-            if (mytoken != null)
-              ToastService.showErrorToast("global.connection_error".tr());
-          }
+          //
         },
       ),
-    );*/
+    );
   }
 }

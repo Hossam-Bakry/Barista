@@ -8,10 +8,12 @@ class RecipeInfoModel extends RecipeInfoEntity {
     required super.brewDeviceImage,
     required super.coffee,
     required super.water,
+    required super.lossPercentage,
     required super.ratio,
     required super.brewedTime,
     required super.grinder,
     required super.recipeSteps,
+    required super.createdAt,
   });
 
   factory RecipeInfoModel.fromJson(Map<String, dynamic> json) =>
@@ -19,13 +21,14 @@ class RecipeInfoModel extends RecipeInfoEntity {
         id: json["id"],
         deviceName: json["name"] ?? "",
         brewDeviceImage: json["imagePath"],
-        coffee: json["coffee"],
-        water: json["water"],
-        ratio: json["ratio"],
+          coffee: num.parse(json["coffee"].toStringAsFixed(2)),
+          water: json["water"],
+          lossPercentage: json["lossPercentage"] ?? 0,
+          ratio: json["ratio"],
         brewedTime: json["drewTime"],
         grinder: json["grinder"] ?? "",
         recipeSteps: (json["steps"] as List)
             .map((e) => RecipeStepsModel.fromJson(e))
             .toList(),
-      );
+          createdAt: json["creationDate"]);
 }

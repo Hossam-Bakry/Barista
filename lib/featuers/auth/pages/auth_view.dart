@@ -1,3 +1,5 @@
+import 'package:barista/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,7 @@ class AuthView extends StatelessWidget {
 
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailRegisterController = TextEditingController();
+  final TextEditingController dateRegisterController = TextEditingController();
   final TextEditingController passwordRegisterController =
       TextEditingController();
   final TextEditingController confirmPasswordRegisterController =
@@ -36,9 +39,11 @@ class AuthView extends StatelessWidget {
     var vm = Provider.of<AuthProvider>(context);
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/auth_background.png"),
+          image: AssetImage(context.locale == const Locale("en")
+              ? "assets/images/auth_background.png"
+              : "assets/images/auth_background_ar.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -139,6 +144,7 @@ class AuthView extends StatelessWidget {
         // ),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
               child: Row(
@@ -155,12 +161,17 @@ class AuthView extends StatelessWidget {
                         child: Container(
                           width: vm.authType != "Login" ? 85 : 40,
                           height: vm.authType != "Login" ? 185 : 100,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(100),
-                              bottomRight: Radius.circular(100),
-                            ),
-                            color: Color(0xFF922E25),
+                          decoration: BoxDecoration(
+                            borderRadius: context.locale == const Locale("en")
+                                ? const BorderRadius.only(
+                                    topRight: Radius.circular(100),
+                                    bottomRight: Radius.circular(100),
+                                  )
+                                : const BorderRadius.only(
+                                    topLeft: Radius.circular(100),
+                                    bottomLeft: Radius.circular(100),
+                                  ),
+                            color: const Color(0xFF922E25),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +179,7 @@ class AuthView extends StatelessWidget {
                               RotatedBox(
                                 quarterTurns: -1,
                                 child: Text(
-                                  "Register",
+                                  "auth.register".tr(),
                                   style: theme.textTheme.titleLarge!.copyWith(
                                     color: vm.authType == "Login"
                                         ? Colors.white54
@@ -200,11 +211,16 @@ class AuthView extends StatelessWidget {
                         child: Container(
                           width: vm.authType == "Login" ? 85 : 40,
                           height: vm.authType == "Login" ? 186 : 100,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(100),
+                          decoration: BoxDecoration(
+                            borderRadius: context.locale == const Locale("en")
+                                ? const BorderRadius.only(
+                                    topRight: Radius.circular(100),
                               bottomRight: Radius.circular(100),
-                            ),
+                                  )
+                                : const BorderRadius.only(
+                                    topLeft: Radius.circular(100),
+                                    bottomLeft: Radius.circular(100),
+                                  ),
                             color: Color(0xFF922E25),
                           ),
                           child: Row(
@@ -213,7 +229,7 @@ class AuthView extends StatelessWidget {
                               RotatedBox(
                                 quarterTurns: -1,
                                 child: Text(
-                                  "Login",
+                                  "auth.login".tr(),
                                   style: theme.textTheme.titleLarge!.copyWith(
                                     color: vm.authType != "Login"
                                         ? Colors.white54
@@ -242,16 +258,17 @@ class AuthView extends StatelessWidget {
                   Expanded(
                     child: PageView(
                       controller: _pageController,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         LoginView(
-                          emailController: emailLoginController,
-                          passwordController: passwordLoginController,
+                          // emailController: emailLoginController,
+                          // passwordController: passwordLoginController,
                           formKey: loginFormKey,
                         ).setHorizontalPadding(context, 0.015),
                         RegisterView(
                           fullNameController: fullNameController,
                           emailController: emailRegisterController,
+                          dateController: dateRegisterController,
                           passwordController: passwordRegisterController,
                           confirmPasswordController:
                               confirmPasswordRegisterController,

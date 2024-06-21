@@ -6,9 +6,11 @@ class RecipeInfoEntity extends Equatable {
   String brewDeviceImage;
   num coffee;
   num water;
+  num lossPercentage;
   String ratio;
-  num brewedTime;
+  String brewedTime;
   String grinder;
+  String createdAt;
   List<RecipeSteps> recipeSteps;
 
   RecipeInfoEntity({
@@ -17,10 +19,12 @@ class RecipeInfoEntity extends Equatable {
     required this.brewDeviceImage,
     required this.coffee,
     required this.water,
+    required this.lossPercentage,
     required this.ratio,
     required this.brewedTime,
     required this.grinder,
     required this.recipeSteps,
+    required this.createdAt,
   });
 
   @override
@@ -34,6 +38,7 @@ class RecipeInfoEntity extends Equatable {
         brewedTime,
         grinder,
         recipeSteps,
+        createdAt,
       ];
 }
 
@@ -42,7 +47,7 @@ class RecipeSteps extends Equatable {
   final String title;
   final String description;
   final String stepLogo;
-  final num brewedTime;
+  final String brewedTime;
 
   const RecipeSteps({
     required this.id,

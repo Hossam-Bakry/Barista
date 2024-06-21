@@ -8,7 +8,7 @@ class LoginUseCase {
 
   LoginUseCase(this._authRepository);
 
-  Future<Either<ServerFailure, bool>> excute(
+  Future<Either<ServerFailure, String>> excute(
       String username, String password) async {
     return await _authRepository.login(username, password);
   }

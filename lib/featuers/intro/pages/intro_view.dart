@@ -65,7 +65,7 @@ class _IntroViewState extends State<IntroView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.asset(_list[index].image,
-                          height: mediaQuery.height * 0.6,
+                          height: mediaQuery.height * 0.59,
                           width: mediaQuery.width,
                           fit: BoxFit.fitHeight),
                     ],

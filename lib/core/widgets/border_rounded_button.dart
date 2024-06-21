@@ -10,10 +10,12 @@ class BorderRoundedButton extends StatelessWidget {
   final double? height;
   final IconData? icon;
   final Color? color;
+  final double fontSize;
 
   const BorderRoundedButton({
     super.key,
     required this.title,
+    this.fontSize = 16,
     this.color,
     this.height,
     this.icon,
@@ -41,12 +43,14 @@ class BorderRoundedButton extends StatelessWidget {
           children: [
             Text(
               title,
+              maxLines: 2,
               style: theme.textTheme.displayLarge!.copyWith(
                 color: color ?? Colors.black,
-                fontSize: 16,
+                fontSize: fontSize,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(width: 10),
             if (icon != null)
               Icon(
                 icon,

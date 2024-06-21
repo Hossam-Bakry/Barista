@@ -5,11 +5,15 @@ import 'package:provider/single_child_widget.dart';
 import '../../featuers/auth/provider/auth_provider.dart';
 import '../../featuers/auth/provider/forget_password_provider.dart';
 import '../../featuers/auth/provider/otp_provider.dart';
-import '../../featuers/home/provider/brew_method_provider.dart';
+import '../../featuers/home/brew_methods_view/provider/brew_method_provider.dart';
 import '../../featuers/home/provider/home_provider.dart';
+import '../../featuers/splash/provider/splash_provider.dart';
 
 class AppProviders {
   static final List<SingleChildWidget> _appProviders = [
+    ChangeNotifierProvider(
+      create: (context) => SplashProvider(),
+    ),
     ChangeNotifierProvider(
       create: (context) => AuthProvider(),
     ),

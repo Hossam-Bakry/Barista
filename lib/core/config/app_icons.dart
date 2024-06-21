@@ -10,6 +10,11 @@ class AppIcons {
   static const String unSelectedPrepareIcon =
       '${assetPath}unSelected_prepare_icon$assetType';
 
+  static const String selectedMyOwnRecipeIcon =
+      '${assetPath}select_my_own_recipe_icn$assetType';
+  static const String unSelectedMyOwnRecipeIcon =
+      '${assetPath}un_select_my_own_recipe_icn$assetType';
+
   static const String coffeeIcon = '${assetPath}coffee_icon$assetType';
   static const String cartIcon = '${assetPath}cart_icon$assetType';
 

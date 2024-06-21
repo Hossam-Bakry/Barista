@@ -15,13 +15,13 @@ class AuthRepositoryImp implements AuthRepository {
   AuthRepositoryImp(this._authDataSource);
 
   @override
-  Future<Either<ServerFailure, bool>> login(
+  Future<Either<ServerFailure, String>> login(
       String email, String password) async {
     try {
       var response = await _authDataSource.login(email, password);
 
       if (response.statusCode == 200 && response.data["status"] == "Success") {
-        return const Right(true);
+        return Right(response.data["data"]["token"]);
       } else if (response.statusCode == 200 &&
           response.data["status"] == "Fail") {
         return Left(

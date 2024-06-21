@@ -1,12 +1,16 @@
-import 'package:barista/featuers/home/pages/brew_methods_view/brew_play_view.dart';
-import 'package:barista/featuers/home/pages/home_layout.dart';
+import 'package:barista/featuers/home/brew_methods_view/pages/brew_result_view.dart';
+import 'package:barista/featuers/home/home_layout.dart';
+import 'package:barista/featuers/home/my_own_recipe_view/pages/own_recipe_rate_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/config/page_route_names.dart';
 import '../../featuers/auth/pages/forget_password_view.dart';
 import '../../featuers/auth/pages/otp_view.dart';
 import '../../featuers/auth/pages/reset_password_view.dart';
-import '../../featuers/home/pages/brew_methods_view/brew_method_details_view.dart';
+import '../../featuers/home/brew_methods_view/pages/brew_method_details_view.dart';
+import '../../featuers/home/brew_methods_view/pages/brew_play_view.dart';
+import '../../featuers/home/profile_view/pages/edit_profile_info_view.dart';
+import '../../featuers/home/profile_view/pages/profile_personal_data_view.dart';
 import '../../featuers/pages.dart';
 
 class Routes {
@@ -39,7 +43,20 @@ class Routes {
             settings: settings);
       case PageRouteNames.brewPlay:
         return MaterialPageRoute(
-            builder: (context) => BrewPlayView(), settings: settings);
+            builder: (context) => const BrewPlayView(), settings: settings);
+      case PageRouteNames.profileData:
+        return MaterialPageRoute(
+            builder: (context) => ProfilePersonalDataView(),
+            settings: settings);
+      case PageRouteNames.editProfileData:
+        return MaterialPageRoute(
+            builder: (context) => EditProfileInfoView(), settings: settings);
+      case PageRouteNames.brewDonePage:
+        return MaterialPageRoute(
+            builder: (context) => BrewResultView(), settings: settings);
+      case PageRouteNames.ownRecipeRateView:
+        return MaterialPageRoute(
+            builder: (context) => OwnRecipeRateView(), settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => const SplashView(), settings: settings);

@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.2+9
+version: 1.0.2+22
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -25,6 +25,8 @@ dependencies:
   # fading animations
   animate_do: ^3.0.2
   lottie: ^2.6.0
+  liquid_pull_to_refresh: ^3.0.1
+  animated_custom_dropdown: ^3.0.0
   # contact animated card
   flutter_bounceable: ^1.1.0
   # loading button
@@ -43,8 +45,6 @@ dependencies:
   bot_toast: ^4.0.3
   # Pin Code Fields
   pinput: ^3.0.1
-  # timer
-  timer_count_down: ^2.2.2
   intl: ^0.18.0
   flutter_svg: ^1.0.1
   flutter_staggered_grid_view: ^0.4.0
@@ -56,12 +56,40 @@ dependencies:
   # Animation Options
   expandable_fab_lite: ^0.0.2
   # Drop Down Options IOS
-  dropdown_cupertino: ^0.0.8
+  #  dropdown_cupertino: ^0.0.8
   # Toggle Button
   toggle_switch: ^2.1.0
+  # Timer
+  custom_timer: ^0.2.3
+  timer_count_down: ^2.2.2
+  # Audio player
+  audioplayers: ^0.20.1
+  # Shared Prefernces to store variables
+  shared_preferences: ^2.0.15
+  # Take Photo
+  image_picker: ^1.0.7
+  image_cropper: ^4.0.1
+  # Handling Permisions
+  permission_handler: ^11.2.0
+  # Rating
+  flutter_rating_bar: ^4.0.1
+  # Biometric Login
+  flutter_secure_storage: ^9.0.0
+  # Local Notification
+  flutter_local_notifications: ^16.3.2
+  local_auth: ^2.1.8
+  country_picker: ^2.0.23
+  flutter_phoenix: "^1.0.0"
+  #  webview_cookie_manager: ^2.0.6
+  webview_flutter: ^4.5.0
+  #  url_launcher: ^6.2.5
+  #  flutter_webview_plugin: ^0.4.0
+  flutter_inappwebview: ^6.0.0
+
+
+
+
   lite_rolling_switch: ^1.0.1
-  circular_chart_flutter: ^0.0.2
-  sleek_circular_slider: ^2.0.1
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -87,6 +115,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/translations/
+    - assets/audio/
 
   fonts:
     - family: Inter
@@ -96,3 +125,10 @@ flutter:
         - asset: assets/fonts/Inter-Medium.ttf
         - asset: assets/fonts/Inter-Medium.ttf
         - asset: assets/fonts/Inter-Regular.ttf
+
+    - family: El Messi-ri
+      fonts:
+        - asset: assets/fonts/ElMessiri-Bold.ttf
+        - asset: assets/fonts/ElMessiri-SemiBold.ttf
+        - asset: assets/fonts/ElMessiri-Medium.ttf
+        - asset: assets/fonts/ElMessiri-Regular.ttf

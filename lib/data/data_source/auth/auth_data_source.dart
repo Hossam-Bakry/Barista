@@ -8,7 +8,7 @@ class AuthDataSource {
 
   Future<Response> login(String email, String password) {
     return _dio.post(
-      "/api/v1/Users/Login",
+      "api/v1/Users/Login",
       data: {
         "email": email,
         "password": password,
@@ -18,10 +18,12 @@ class AuthDataSource {
 
   Future<Response> register(RegisterRequestData data) {
     return _dio.post(
-      "/api/v1/Users/Register",
+      "api/v1/Users/Register",
       data: {
         "userName": data.userName,
         "email": data.email,
+        "birthDate": data.birthDate,
+        "gender": data.gender,
         "country": "Egypt",
         "phoneNumber": data.phoneNumber,
         "password": data.password,

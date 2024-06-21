@@ -11,6 +11,13 @@ import 'package:barista/domain/use_cases/auth/reset_password_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:progress_state_button/progress_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/Services/toast_service.dart';
+import '../../../core/config/page_route_names.dart';
+import '../../../core/services/biometrics_service.dart';
+import '../../../core/services/secure_storage_service.dart';
+import '../../../main.dart';
 
 class AuthProvider extends ChangeNotifier {
   String _authType = "Login";
@@ -18,13 +25,26 @@ class AuthProvider extends ChangeNotifier {
 
   final WebServices _webServices = WebServices();
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final List<String> _genderList = [
+    'male',
+    'female',
+  ];
+
+  TextEditingController get emailController => _emailController;
+
+  TextEditingController get passwordController => _passwordController;
+
   late AuthDataSource _authDataSource;
   late AuthRepository _authRepository;
   late RegisterUseCase _registerUseCase;
   late LoginUseCase _loginrUseCase;
   late ResetPasswordUseCase _resetPasswordUseCase;
-
   late RegisterResponse _registerData;
+
+  List<String> get genderList => _genderList;
 
   RegisterResponse get registerData => _registerData;
 
@@ -71,6 +91,9 @@ class AuthProvider extends ChangeNotifier {
 
     var response = await _loginrUseCase.excute(username, password);
 
+    SecureStorageService().put(key: 'userName', value: username);
+    SecureStorageService().put(key: 'password', value: password);
+
     return response.fold(
       (fail) {
         SnackBarService.showErrorMessage(fail.message ?? "");
@@ -79,6 +102,7 @@ class AuthProvider extends ChangeNotifier {
         return Future.value(false);
       },
       (data) {
+        setToken(data);
         notifyListeners();
         return Future.value(true);
       },
@@ -115,5 +139,50 @@ class AuthProvider extends ChangeNotifier {
         return Future.value(true);
       },
     );
+  }
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  Future<bool> setIntroState() async {
+    final SharedPreferences prefs = await _prefs;
+
+    return prefs.setString("intro", "true");
+  }
+
+  Future<void> setToken(String token) {
+    return _webServices.setMobileToken(token);
+  }
+
+  Future<void> loginByBiometrics() async {
+    final userName = await SecureStorageService().get('userName');
+    final password = await SecureStorageService().get('password');
+    if (userName != null && password != null) {
+      final didAuthenticate = await BiometricsService().authenticate();
+      if (didAuthenticate) {
+        print("Authentication");
+        _emailController.text = userName;
+        _passwordController.text = password;
+        login(
+          username: _emailController.text,
+          password: _passwordController.text,
+        ).then((value) {
+          if (value == true) {
+            EasyLoading.dismiss();
+            SnackBarService.showSuccessMessage(
+              "you are loged in successfully",
+            );
+            navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              PageRouteNames.home,
+              (route) => false,
+            );
+          } else {
+            EasyLoading.dismiss();
+          }
+        });
+      }
+    } else {
+      ToastService.showErrorToast(
+          "Something went wrong please type your credentials manually");
+    }
   }
 }

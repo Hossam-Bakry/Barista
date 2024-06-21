@@ -164,7 +164,7 @@ class SnackBarService {
         );
       },
       duration: const Duration(
-        seconds: 10,
+        seconds: 4,
       ),
       dismissDirections: [DismissDirection.endToStart],
     );
@@ -331,121 +331,9 @@ class SnackBarService {
         );
       },
       duration: const Duration(
-        seconds: 10,
+        seconds: 4,
       ),
       dismissDirections: [DismissDirection.endToStart],
     );
   }
-
-// static void showUnexpectedErrorMessage() {
-//   BotToast.showCustomNotification(
-//     toastBuilder: (void Function() cancelFunc) {
-//       return Material(
-//         color: Colors.transparent,
-//         child: Container(
-//           width: double.maxFinite,
-//           height: 95,
-//           padding: const EdgeInsets.all(16),
-//           margin: const EdgeInsets.only(
-//             left: 24,
-//             right: 24,
-//           ),
-//           decoration: BoxDecoration(
-//             color: Colors.red[600],
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Expanded(
-//                 flex: 3,
-//                 child: Text(
-//                   'global.unexpected_error'.tr(),
-//                   textAlign: TextAlign.start,
-//                   maxLines: 3,
-//                   overflow: TextOverflow.fade,
-//                   style: const TextStyle(
-//                     fontFamily: 'Inter',
-//                     fontSize: 16,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 flex: 1,
-//                 child: IconButton(
-//                   onPressed: cancelFunc,
-//                   icon: const Icon(
-//                     Icons.close_rounded,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       );
-//     },
-//     duration: const Duration(
-//       seconds: 10,
-//     ),
-//     dismissDirections: [DismissDirection.endToStart],
-//   );
-// }
-//
-// static void showNoConnectionError() {
-//   BotToast.showCustomNotification(
-//     toastBuilder: (void Function() cancelFunc) {
-//       return Material(
-//         color: Colors.transparent,
-//         child: Container(
-//           width: double.maxFinite,
-//           height: 95,
-//           padding: const EdgeInsets.all(16),
-//           margin: const EdgeInsets.only(
-//             left: 24,
-//             right: 24,
-//           ),
-//           decoration: BoxDecoration(
-//             color: Colors.red[600],
-//             borderRadius: BorderRadius.circular(12),
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Expanded(
-//                 flex: 3,
-//                 child: Text(
-//                   'global.no_connection_error'.tr(),
-//                   textAlign: TextAlign.start,
-//                   maxLines: 3,
-//                   overflow: TextOverflow.fade,
-//                   style: const TextStyle(
-//                     fontFamily: 'Inter',
-//                     fontSize: 16,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 flex: 1,
-//                 child: IconButton(
-//                   onPressed: cancelFunc,
-//                   icon: const Icon(
-//                     Icons.close_rounded,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       );
-//     },
-//     duration: const Duration(
-//       seconds: 10,
-//     ),
-//     dismissDirections: [DismissDirection.endToStart],
-//   );
-// }
 }

@@ -17,6 +17,7 @@ class CustomTextField extends StatefulWidget {
   final IconData? icon;
   final TextInputAction? action;
   final FocusNode? focusNode;
+  final Color? hintColor;
 
   const CustomTextField({
     super.key,
@@ -42,6 +43,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.action,
     this.focusNode,
+    this.hintColor = Colors.white,
   });
 
   @override
@@ -76,8 +78,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textInputAction: widget.action ?? TextInputAction.done,
       focusNode: widget.focusNode,
       decoration: InputDecoration(
-        // fillColor: Colors.white,
-        // filled: true,
         suffixIcon: widget.isPassword ?? false
             ? InkWell(
                 onTap: () {
@@ -93,7 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             : widget.suffixWidget,
         prefixIcon: widget.prefixIcon,
         hintText: widget.hint,
-        hintStyle: const TextStyle(fontSize: 14, color: Colors.white),
+        hintStyle: TextStyle(fontSize: 14, color: widget.hintColor),
         counterText: "",
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -104,6 +104,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         // suffix: isPass widget.suffixWidget,
         // contentPadding: const EdgeInsets.only(top: 5,left: 5, right: 5),
+        disabledBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.white,
+            width: 1,
+          ),
+        ),
         enabledBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
