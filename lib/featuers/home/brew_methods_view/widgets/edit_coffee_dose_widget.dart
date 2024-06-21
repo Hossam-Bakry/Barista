@@ -384,7 +384,7 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                       ),
                                     ),
                                     onChanged: (value) {
-                                      vm.setGrinderValue(value);
+                                      vm.setGrinderValue(value!);
                                     },
                                   ),
                                 ),

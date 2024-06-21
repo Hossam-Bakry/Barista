@@ -45,7 +45,7 @@ class OwnRecipeRateView extends StatelessWidget {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: ExpandableFab(
             fabSize: 50,
-            heroTag: "heroTag",
+            // heroTag: "heroTag",
             controller: vm.expandFabController,
             color: theme.primaryColor,
             icon: SvgPicture.asset(
@@ -57,7 +57,7 @@ class OwnRecipeRateView extends StatelessWidget {
             fabMargin: 8,
             children: [
               ActionButton(
-                heroTage: "button1",
+                // heroTage: "button1",
                 color: Colors.black54,
                 icon: SvgPicture.asset("assets/icons/steps_icon.svg"),
                 onPressed: () {
@@ -77,7 +77,7 @@ class OwnRecipeRateView extends StatelessWidget {
                 },
               ),
               ActionButton(
-                heroTage: "button2",
+                // heroTage: "button2",
                 color: Colors.black54,
                 icon: SvgPicture.asset("assets/icons/play_icon.svg"),
                 onPressed: () {
@@ -91,7 +91,7 @@ class OwnRecipeRateView extends StatelessWidget {
                 },
               ),
               ActionButton(
-                heroTage: "button3",
+                // heroTage: "button3",
                 color: Colors.black54,
                 icon: SvgPicture.asset("assets/icons/slider_icon.svg"),
                 onPressed: () {

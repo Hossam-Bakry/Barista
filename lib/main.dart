@@ -2,6 +2,7 @@ import 'package:barista/core/config/application_theme.dart';
 import 'package:barista/core/config/page_route_names.dart';
 import 'package:barista/core/config/routes.dart';
 import 'package:barista/core/services/loading_service.dart';
+import 'package:barista/core/services/notification_service.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ import 'core/config/providers.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initializeNotification();
   runApp(
     EasyLocalization(
       supportedLocales: const [

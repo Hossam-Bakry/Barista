@@ -13,10 +13,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:progress_state_button/progress_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/Services/toast_service.dart';
 import '../../../core/config/page_route_names.dart';
 import '../../../core/services/biometrics_service.dart';
 import '../../../core/services/secure_storage_service.dart';
+import '../../../core/services/toast_service.dart';
 import '../../../main.dart';
 
 class AuthProvider extends ChangeNotifier {

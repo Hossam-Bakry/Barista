@@ -34,7 +34,7 @@ dependencies:
   # Handling network requests
   dio: ^4.0.6
   # Easy Loading
-  #  flutter_easyloading: ^3.0.4
+#  flutter_easyloading: ^3.0.4
   # Show Message in Screens
   fluttertoast: ^8.1.1
   # Functional Programming
@@ -63,14 +63,14 @@ dependencies:
   custom_timer: ^0.2.3
   timer_count_down: ^2.2.2
   # Audio player
-  audioplayers: ^0.20.1
+  audioplayers: ^4.1.0
   # Shared Prefernces to store variables
   shared_preferences: ^2.0.15
   # Take Photo
   image_picker: ^1.0.7
   image_cropper: ^4.0.1
   # Handling Permisions
-  permission_handler: ^11.2.0
+  permission_handler: any
   # Rating
   flutter_rating_bar: ^4.0.1
   # Biometric Login
@@ -85,6 +85,8 @@ dependencies:
   #  url_launcher: ^6.2.5
   #  flutter_webview_plugin: ^0.4.0
   flutter_inappwebview: ^6.0.0
+
+  awesome_notifications: ^0.8.2
 
 
 
