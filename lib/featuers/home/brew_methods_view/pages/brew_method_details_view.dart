@@ -66,7 +66,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ExpandableFab(
           fabSize: 50,
-          heroTag: "heroTag",
+          // heroTag: "heroTag",
           controller: vm.expandFabController,
           color: theme.primaryColor,
           icon: SvgPicture.asset(
@@ -78,7 +78,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
           fabMargin: 8,
           children: [
             ActionButton(
-              heroTage: "button1",
+              // heroTage: "button1",
               color: Colors.black54,
               icon: SvgPicture.asset("assets/icons/steps_icon.svg"),
               onPressed: () {
@@ -98,7 +98,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
               },
             ),
             ActionButton(
-              heroTage: "button2",
+              // heroTage: "button2",
               color: Colors.black54,
               icon: SvgPicture.asset("assets/icons/play_icon.svg"),
               onPressed: () {
@@ -112,7 +112,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
               },
             ),
             ActionButton(
-              heroTage: "button3",
+              // heroTage: "button3",
               color: Colors.black54,
               icon: SvgPicture.asset("assets/icons/slider_icon.svg"),
               onPressed: () {

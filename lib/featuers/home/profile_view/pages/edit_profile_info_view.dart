@@ -301,7 +301,7 @@ class EditProfileInfoView extends StatelessWidget {
                                       color: Colors.transparent, width: 0.5)),
                               hintStyle: theme.textTheme.bodyLarge),
                           onChanged: (value) {
-                            vm.setGender(value);
+                            vm.setGender(value!);
                             // genderValue = value;
                             print(value);
                           },

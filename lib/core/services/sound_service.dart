@@ -15,20 +15,20 @@ class SoundService {
     return _instance!;
   }
 
-  final AudioCache _player = AudioCache(
-    prefix: 'assets/audio/',
+  final AudioPlayer _player = AudioPlayer(
+    // prefix: 'assets/audio/',
   );
 
   Future<void> loadSounds() async {
-    await _player.load(
-      'audio_effect.mp3',
-    );
+    // await _player.load(
+    //   'audio_effect.mp3',
+    // );
   }
 
   Future<void> playTapDownSound() async {
     await _player.play(
-      'audio_effect.mp3',
-      mode: PlayerMode.LOW_LATENCY,
+      AssetSource("audio/audio_effect.mp3"),
+      mode: PlayerMode.lowLatency,
     );
   }
 }

@@ -5,7 +5,8 @@
 import FlutterMacOS
 import Foundation
 
-import audioplayers
+import audioplayers_darwin
+import awesome_notifications
 import file_selector_macos
 import flutter_inappwebview_macos
 import flutter_local_notifications
@@ -15,7 +16,8 @@ import shared_preferences_foundation
 import smart_auth
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  AudioplayersPlugin.register(with: registry.registrar(forPlugin: "AudioplayersPlugin"))
+  AudioplayersDarwinPlugin.register(with: registry.registrar(forPlugin: "AudioplayersDarwinPlugin"))
+  AwesomeNotificationsPlugin.register(with: registry.registrar(forPlugin: "AwesomeNotificationsPlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   InAppWebViewFlutterPlugin.register(with: registry.registrar(forPlugin: "InAppWebViewFlutterPlugin"))
   FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
