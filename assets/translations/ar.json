@@ -56,7 +56,8 @@
     "save_changes": "حفظ",
     "click_to_change": "اضغط للتغيير",
     "dialog_title_play": "استمتع بقهوتك",
-    "dialog_desc_play": "تم إعداد وصفة القهوة الخاصة بك!"
+    "dialog_desc_play": "تم إعداد وصفة القهوة الخاصة بك!",
+    "minute": "min"
   },
   "rate": {
     "all_done": "انتهيت !",

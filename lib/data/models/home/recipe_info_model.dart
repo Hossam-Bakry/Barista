@@ -1,3 +1,4 @@
+import 'package:barista/core/extensions/time_formate.dart';
 import 'package:barista/data/models/home/recipe_steps_model.dart';
 import 'package:barista/domain/entities/home/recipe_info_entity.dart';
 
@@ -25,8 +26,8 @@ class RecipeInfoModel extends RecipeInfoEntity {
           water: json["water"],
           lossPercentage: json["lossPercentage"] ?? 0,
           ratio: json["ratio"],
-        brewedTime: json["drewTime"],
-        grinder: json["grinder"] ?? "",
+          brewedTime: timeFormat(json["drewTime"]).toString(),
+          grinder: json["grinder"] ?? "",
         recipeSteps: (json["steps"] as List)
             .map((e) => RecipeStepsModel.fromJson(e))
             .toList(),

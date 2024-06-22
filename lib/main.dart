@@ -29,6 +29,8 @@ void main() async {
     ),
   );
 
+  // print(timeFormat("00:02:00"));
+
   configLoading();
 }
 

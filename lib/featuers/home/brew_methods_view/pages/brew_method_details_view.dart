@@ -372,12 +372,24 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                   style: theme.textTheme.bodySmall,
                                 ),
                                 const SizedBox(height: 10),
-                                Text(
-                                  args.brewedTime.toString(),
-                                  // "01:20",
-                                  textAlign: TextAlign.center,
-                                  style: theme.textTheme.bodyLarge!
-                                      .copyWith(color: theme.primaryColor),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      args.brewedTime.toString(),
+                                      // "01:20",
+                                      textAlign: TextAlign.center,
+                                      style: theme.textTheme.bodyLarge!
+                                          .copyWith(color: theme.primaryColor),
+                                    ),
+                                    Text(
+                                      "recipe_data.minute".tr(),
+                                      textAlign: TextAlign.center,
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(color: theme.primaryColor),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

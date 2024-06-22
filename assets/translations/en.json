@@ -55,7 +55,8 @@
     "save_changes": "Save Changes",
     "click_to_change": "Click to change",
     "dialog_title_play": "Enjoining with your coffee",
-    "dialog_desc_play": "Your coffee recipe perpration done!"
+    "dialog_desc_play": "Your coffee recipe perpration done!",
+    "minute": "min"
   },
   "rate": {
     "all_done": "All Done !",

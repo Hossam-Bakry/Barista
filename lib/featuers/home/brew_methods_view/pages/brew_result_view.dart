@@ -6,7 +6,6 @@ import 'package:barista/core/widgets/border_rounded_button.dart';
 import 'package:barista/core/widgets/custom_text_field.dart';
 import 'package:barista/domain/entities/home/recipe_info_entity.dart';
 import 'package:barista/featuers/home/brew_methods_view/provider/brew_method_provider.dart';
-import 'package:barista/featuers/home/provider/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -133,6 +132,29 @@ class BrewResultView extends StatelessWidget {
               "Beehouse",
               style: theme.textTheme.titleLarge,
             ),
+            actions: [
+              InkWell(
+                onTap: () {
+                  navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    PageRouteNames.home,
+                    (route) => false,
+                  );
+                  vm.clearProviderData();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: theme.primaryColor,
+                    child: Icon(
+                      Icons.home_filled,
+                      size: 32,
+                      color: theme.colorScheme.onSecondary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           // floatingActionButton: FadeInUp(
@@ -321,7 +343,7 @@ class BrewResultView extends StatelessWidget {
                             style: theme.textTheme.bodyMedium,
                           ),
                           Text(
-                            "${(args.brewedTime * 60)} ${"rate.secs".tr()}",
+                            "${(double.parse(args.brewedTime).toInt() * 60)} ${"rate.secs".tr()}",
                             style: theme.textTheme.bodyMedium!
                                 .copyWith(color: theme.primaryColor),
                           ),

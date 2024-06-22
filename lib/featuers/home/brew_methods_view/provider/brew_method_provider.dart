@@ -147,15 +147,15 @@ class BrewMethodProvider extends ChangeNotifier {
     _controllersList = [];
     _totalTime = 0;
     for (var element in steps) {
-      // _controllersList.add(
-      //   AnimationController(
-      //     duration: Duration(
-      //       seconds: element.brewedTime.toInt(),
-      //     ),
-      //     vsync: v,
-      //   ),
-      // );
-      // _totalTime += element.brewedTime.toInt();
+      _controllersList.add(
+        AnimationController(
+          duration: Duration(
+            seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+          ),
+          vsync: v,
+        ),
+      );
+      _totalTime += (double.parse(element.brewedTime).toInt() * 60);
     }
   }
 
