@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:barista/core/extensions/time_formate.dart';
 import 'package:barista/core/services/snackbar_service.dart';
 import 'package:barista/featuers/home/provider/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -513,8 +514,11 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                       double.parse(vm.coffeeController.text),
                                   water: double.parse(vm.waterController.text),
                                   ratio: "1: ${vm.ratioController.text}",
-                                  drewTime:
-                                      double.parse(vm.brewsTimeController.text),
+                                  drewTime: timeFullFormat(
+                                      double.parse(vm.brewsTimeController.text)
+                                          .toInt()
+                                          .toString()),
+                                  // double.parse(vm.brewsTimeController.text),
                                   grinder: vm.grinderValue,
                                   coffeeBeans:
                                       vm.coffeeBeansController.text ?? "",

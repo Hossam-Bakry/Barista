@@ -59,6 +59,9 @@
     "minute": "min"
   },
   "rate": {
+    "coffee": "Coffee",
+    "water": "Water",
+    "grinder": "Grinder",
     "all_done": "All Done !",
     "desc": "Hope you enjoy this cup of coffee ! Add notes below to improve your skills over time.",
     "review_your_recipe": "Review the taste of your coffee",

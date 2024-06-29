@@ -32,7 +32,9 @@ void main() async {
     ),
   );
 
-  // print(timeFormat("00:02:00"));
+  // Timer(Duration(seconds: 10), () {
+  //   NotificationService.showNotification(title: "stepsDetailList[stepNumber+1].title", body: "stepsDetailList[stepNumber+1].description");
+  // });
 
   configLoading();
 }
@@ -67,4 +69,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

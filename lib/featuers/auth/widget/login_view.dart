@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:barista/core/config/page_route_names.dart';
-import 'package:barista/core/services/notification_service.dart';
 import 'package:barista/featuers/auth/pages/in_app_web_view.dart';
 import 'package:barista/featuers/auth/provider/auth_provider.dart';
 import 'package:barista/main.dart';
@@ -224,7 +223,7 @@ class _LoginViewState extends State<LoginView> {
                   icon: Icons.arrow_forward,
                   iconColor: theme.colorScheme.onSecondary,
                   onPressed: () {
-                    NotificationService.showNotification(title: "title", body: "body");
+                    // NotificationService.showNotification(title: "title", body: "body");
                     if (widget.formKey.currentState!.validate()) {
                       EasyLoading.show();
                       provider

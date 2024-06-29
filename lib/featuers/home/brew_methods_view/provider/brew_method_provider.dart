@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/services/notification_service.dart';
 import '../../../../core/services/web_service.dart';
 import '../../../../data/data_source/home/send_rate_data_source.dart';
 import '../../../../data/repository_imp/home/send_rate_repository_imp.dart';
@@ -159,10 +160,11 @@ class BrewMethodProvider extends ChangeNotifier {
     }
   }
 
-  play() {
+  Future<void> play() async {
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
     }
+
     notifyListeners();
   }
 
@@ -183,7 +185,6 @@ class BrewMethodProvider extends ChangeNotifier {
 
   playNextStep(var function) {
     if (_stepNumber == _controllersList.length - 1) {
-      print("finished");
       if (function != null) {
         function(navigatorKey.currentState?.context);
       }
@@ -201,7 +202,6 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   playPreviousStep() {
-    print("previous step");
     if (_stepNumber > 0) {
       _stepNumber--;
       play();
@@ -212,39 +212,40 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   playNextAnimation(context) {
-    // 0 1
-    // 1 2
     if (_stepNumber < _controllersList.length - 1) {
       if (_controllersList[stepNumber].isCompleted) {
-        increaseStepNumber().then((value) {
-          SoundService.instance.playTapDownSound();
-          play();
-        });
+        increaseStepNumber().then(
+          (value) {
+            SoundService.instance.playTapDownSound();
+            play().then(
+              (value) => NotificationService.showNotification(
+                title: "Next Step",
+                body: "previous step: ${stepsDetailList[stepNumber].title}",
+              ),
+            );
+          },
+        );
       }
-
-      // if (_controllersList[_controllersList.length].isCompleted) {
-      //   isFinishedAnimation(context);
-      // }
     }
     notifyListeners();
   }
 
-  Future<void> isFinishedAnimation({
-    context,
-    required Function action,
-  }) async {
-    if (_controllersList[_controllersList.length - 1].isCompleted) {
-      print(_stepNumber);
-      print("doneeeee");
-      action();
-    }
-  }
-
   clearProviderData() {
     changeStartState(false);
-    int _totalTime = 0;
-    int _rate = 0;
-    int _stepNumber = 0;
-    List<AnimationController> _controllersList = [];
+    _totalTime = 0;
+    _rate = 0;
+    _stepNumber = 0;
+    _controllersList = [];
   }
+
+// Future<void> isFinishedAnimation({
+//   context,
+//   required Function action,
+// }) async {
+//   if (_controllersList[_controllersList.length - 1].isCompleted) {
+//     print(_stepNumber);
+//     print("doneeeee");
+//     action();
+//   }
+// }
 }

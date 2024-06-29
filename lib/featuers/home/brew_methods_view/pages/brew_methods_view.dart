@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:barista/core/services/notification_service.dart';
 import 'package:barista/featuers/home/brew_methods_view/widgets/brew_iteam_loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +26,8 @@ class BrewMethodsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(timeFullFormat("00:02:00"));
+
     var provider = Provider.of<HomeProvider>(context);
     var theme = Theme.of(context);
     return Scaffold(
@@ -129,10 +130,10 @@ class BrewMethodsView extends StatelessWidget {
                           Future.delayed(
                             const Duration(milliseconds: 300),
                             () {
-                              NotificationService.showNotification(
-                                  title: "title",
-                                  body: provider
-                                      .brewDevicesList[index].deviceName);
+                              // NotificationService.showNotification(
+                              //     title: "title",
+                              //     body: provider
+                              //         .brewDevicesList[index].deviceName);
                               navigatorKey.currentState?.pushNamed(
                                 PageRouteNames.brewMethodDetails,
                                 arguments: provider.brewDevicesList[index],

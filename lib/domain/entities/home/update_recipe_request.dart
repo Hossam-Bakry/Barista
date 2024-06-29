@@ -5,7 +5,7 @@ class UpdateRecipeRequest {
   final double coffee;
   final double water;
   final String ratio;
-  final double drewTime;
+  final String drewTime;
   final String grinder;
   final String coffeeBeans;
 

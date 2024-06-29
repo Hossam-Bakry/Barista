@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:barista/core/config/page_route_names.dart';
@@ -60,6 +61,13 @@ class _BrewPlayViewState extends State<BrewPlayView>
       interval: CustomTimerInterval.milliseconds,
     );
     _startController.start();
+    // Timer(
+    //   const Duration(seconds: 5),
+    //   () {
+    //     NotificationService.showNotification(
+    //         title: "Next Step", body: "previous step: }");
+    //   },
+    // );
 
     super.initState();
   }
@@ -70,6 +78,10 @@ class _BrewPlayViewState extends State<BrewPlayView>
     _startController.dispose();
     _curvedAnimation.dispose();
     _animationStart.removeListener(() {});
+
+    for (var element in provider.controllersList) {
+      element.dispose();
+    }
     super.dispose();
   }
 
@@ -139,6 +151,8 @@ class _BrewPlayViewState extends State<BrewPlayView>
                           PageRouteNames.brewDonePage,
                           arguments: widget.recipeInfo,
                         );
+                        Provider.of<BrewMethodProvider>(context, listen: false)
+                            .clearProviderData();
                       }),
                   const Spacer(),
                 ],
@@ -179,9 +193,6 @@ class _BrewPlayViewState extends State<BrewPlayView>
               ..addListener(
                 () {
                   vm.playNextAnimation(context);
-                  if (vm.isFinished) {
-                    print("Finished");
-                  }
                 },
               );
 
@@ -195,6 +206,16 @@ class _BrewPlayViewState extends State<BrewPlayView>
           child: Scaffold(
             appBar: AppBar(
               centerTitle: false,
+              leading: InkWell(
+                onTap: () {
+                  navigatorKey.currentState!.pop();
+                  Future.delayed(
+                    const Duration(seconds: 1),
+                    () => provider.clearProviderData(),
+                  );
+                },
+                child: const Icon(Icons.arrow_back_ios),
+              ),
               title: Row(
                 children: [
                   Column(
@@ -247,9 +268,10 @@ class _BrewPlayViewState extends State<BrewPlayView>
                     build: (BuildContext context, double time) => Text(
                       time.toString().substring(0, 1),
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: theme.primaryColor),
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: theme.primaryColor,
+                          ),
                     ),
                     interval: const Duration(seconds: 1),
                     onFinished: () {
@@ -445,21 +467,22 @@ class _BrewPlayViewState extends State<BrewPlayView>
                       ],
                     ),
                     const Spacer(),
-                    Bounceable(
-                      onTap: () {
-                        vm.playNextStep(showEndDialog);
-                        print("done");
-                      },
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundColor: theme.primaryColor.withOpacity(0.4),
-                        child: const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: 28,
+                    if (vm.isStart != false)
+                      Bounceable(
+                        onTap: () {
+                          vm.playNextStep(showEndDialog);
+                          print("done");
+                        },
+                        child: CircleAvatar(
+                          radius: 25,
+                          backgroundColor: theme.primaryColor.withOpacity(0.4),
+                          child: const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                            size: 28,
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 ).setVerticalPadding(context, 0.1),
               ],
