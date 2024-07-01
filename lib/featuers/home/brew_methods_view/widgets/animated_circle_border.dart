@@ -213,6 +213,9 @@ class _WaterFlowState extends State<WaterFlow> with TickerProviderStateMixin {
   }
 
   @override
+  void deactivate() {}
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<BrewMethodProvider>(
       builder: (context, vm, _) {

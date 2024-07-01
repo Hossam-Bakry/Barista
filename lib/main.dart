@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:barista/core/config/application_theme.dart';
 import 'package:barista/core/config/page_route_names.dart';
 import 'package:barista/core/config/routes.dart';
@@ -16,6 +18,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -67,5 +71,13 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

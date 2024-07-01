@@ -163,6 +163,12 @@ class BrewMethodProvider extends ChangeNotifier {
   Future<void> play() async {
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
+      NotificationService.showNotification(
+        scheduled: true,
+        interval: totalTime ~/ 2,
+        title: "Next Step",
+        body: "previous step: ${stepsDetailList[stepNumber].title}",
+      );
     }
 
     notifyListeners();
@@ -217,12 +223,7 @@ class BrewMethodProvider extends ChangeNotifier {
         increaseStepNumber().then(
           (value) {
             SoundService.instance.playTapDownSound();
-            play().then(
-              (value) => NotificationService.showNotification(
-                title: "Next Step",
-                body: "previous step: ${stepsDetailList[stepNumber].title}",
-              ),
-            );
+            play();
           },
         );
       }

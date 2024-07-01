@@ -1,15 +1,14 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
-
 class NotificationService {
   static Future<void> initializeNotification() async {
     await AwesomeNotifications().initialize(
       null,
       [
         NotificationChannel(
-          channelGroupKey: 'high_importance_channel',
-          channelKey: 'high_importance_channel',
+          channelGroupKey: 'basic_channel_group',
+          channelKey: 'basic_channel',
           channelName: 'Basic notifications',
           channelDescription: 'Notification channel for basic tests',
           defaultColor: const Color(0xFF9D50DD),
@@ -23,15 +22,15 @@ class NotificationService {
       ],
       channelGroups: [
         NotificationChannelGroup(
-          channelGroupKey: 'high_importance_channel_group',
-          channelGroupName: 'Group 1',
+          channelGroupKey: 'basic_channel_group',
+          channelGroupName: 'Basic group',
         )
       ],
       debug: true,
     );
 
     await AwesomeNotifications().isNotificationAllowed().then(
-          (isAllowed) async {
+      (isAllowed) async {
         if (!isAllowed) {
           await AwesomeNotifications().requestPermissionToSendNotifications();
         }
@@ -78,7 +77,9 @@ class NotificationService {
     // }
     if (payload["cancel"] == "true") {}
   }
-/// to show No
+
+  /// to show No
+
   static Future<void> showNotification({
     required final String title,
     required final String body,
@@ -95,12 +96,16 @@ class NotificationService {
     final int id = 1,
     final bool locked = false,
   }) async {
+    String localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+
     assert(!scheduled || (scheduled && interval != null));
 
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
+        displayOnBackground: true,
+        displayOnForeground: false,
         id: id,
-        channelKey: 'high_importance_channel',
+        channelKey: 'basic_channel',
         title: title,
         body: body,
         actionType: actionType,
@@ -114,6 +119,15 @@ class NotificationService {
       ),
       actionButtons: actionButtons,
       schedule: scheduled
+      //     ? NotificationCalendar.fromDate(
+      //         date: DateTime(
+      //             DateTime.now().year,
+      //             DateTime.now().month,
+      //             DateTime.now().day,
+      //             DateTime.now().hour,
+      //             DateTime.now().minute,
+      //             DateTime.now().second + interval!))
+      //     : null,
           ? NotificationInterval(
         interval: interval,
         timeZone:

@@ -215,7 +215,7 @@ class AuthView extends StatelessWidget {
                             borderRadius: context.locale == const Locale("en")
                                 ? const BorderRadius.only(
                                     topRight: Radius.circular(100),
-                              bottomRight: Radius.circular(100),
+                                    bottomRight: Radius.circular(100),
                                   )
                                 : const BorderRadius.only(
                                     topLeft: Radius.circular(100),
