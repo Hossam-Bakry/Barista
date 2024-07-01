@@ -161,11 +161,13 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   Future<void> play() async {
+    int notificationTime =
+        (double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60;
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
       NotificationService.showNotification(
         scheduled: true,
-        interval: totalTime ~/ 2,
+        interval: notificationTime,
         title: "Next Step",
         body: "previous step: ${stepsDetailList[stepNumber].title}",
       );
