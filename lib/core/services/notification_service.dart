@@ -137,4 +137,29 @@ class NotificationService {
           : null,
     );
   }
+
+  static Future<void> cancelAllNotifications() async {
+    try{
+      await AwesomeNotifications().cancelAllSchedules();
+    }catch(e){
+      debugPrint(e.toString());
+    }try{
+      await AwesomeNotifications().cancelAll();
+    }catch(e){
+      debugPrint(e.toString());
+    }
+  }
+  static Future<void> cancelNotification({int id = 1}) async {
+
+    try{
+      await AwesomeNotifications().cancel(id);
+    }catch(e){
+      debugPrint(e.toString());
+    }try{
+      await AwesomeNotifications().cancelSchedule(id);
+    }catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
 }

@@ -85,6 +85,7 @@ class BrewMethodProvider extends ChangeNotifier {
   bool get isFinished => _isFinished;
 
   int get totalTime => _totalTime;
+  int initialTime = 0;
 
   List<RecipeStepDetails> get stepsDetails => _stepsDetails;
 
@@ -163,6 +164,7 @@ class BrewMethodProvider extends ChangeNotifier {
   Future<void> play() async {
     int notificationTime =
         (double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60;
+    notificationTime -= initialTime;
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
       NotificationService.showNotification(
@@ -179,6 +181,7 @@ class BrewMethodProvider extends ChangeNotifier {
   pause() {
     if (_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].stop();
+      NotificationService.cancelAllNotifications();
     }
     notifyListeners();
   }
@@ -187,6 +190,7 @@ class BrewMethodProvider extends ChangeNotifier {
     for (var element in _controllersList) {
       element.reset();
     }
+    NotificationService.cancelAllNotifications();
     _stepNumber = 0;
     notifyListeners();
   }

@@ -296,6 +296,7 @@ class _BrewPlayViewState extends State<BrewPlayView>
                         child: CustomTimer(
                           controller: provider.controller,
                           builder: (state, time) {
+                            provider.initialTime = time.duration.inSeconds;
                             return Row(
                               children: [
                                 Text(
