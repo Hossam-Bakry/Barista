@@ -21,7 +21,8 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   void initState() {
     provider = Provider.of<HomeProvider>(context, listen: false);
-    provider.changeIndex(0);
+    Future.delayed(Duration.zero, () =>     provider.changeIndex(0)
+    );
     Future.wait([
       provider.getProfileInfo(),
       provider.getAllRecipes(),

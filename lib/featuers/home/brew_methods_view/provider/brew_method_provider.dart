@@ -161,10 +161,14 @@ class BrewMethodProvider extends ChangeNotifier {
     }
   }
 
+  int notificationTime = 0;
   Future<void> play() async {
-    int notificationTime =
+    notificationTime +=
         (double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60;
-    notificationTime -= initialTime;
+    print(notificationTime);
+    print(initialTime);
+    notificationTime = notificationTime - initialTime;
+    print(notificationTime);
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
       NotificationService.showNotification(
@@ -174,7 +178,9 @@ class BrewMethodProvider extends ChangeNotifier {
         body: "previous step: ${stepsDetailList[stepNumber].title}",
       );
     }
-
+    if (stepNumber == stepsDetailList.length - 1) {
+      notificationTime = 0;
+    }
     notifyListeners();
   }
 
@@ -239,6 +245,12 @@ class BrewMethodProvider extends ChangeNotifier {
 
   clearProviderData() {
     changeStartState(false);
+    controller.dispose();
+    for (var element in _controllersList) {
+      element.dispose();
+    }
+    notificationTime = 0;
+    initialTime = 0;
     _totalTime = 0;
     _rate = 0;
     _stepNumber = 0;
@@ -253,6 +265,7 @@ class BrewMethodProvider extends ChangeNotifier {
 //     print(_stepNumber);
 //     print("doneeeee");
 //     action();
-//   }
+//
+//  }
 // }
 }

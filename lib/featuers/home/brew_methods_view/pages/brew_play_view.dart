@@ -146,13 +146,14 @@ class _BrewPlayViewState extends State<BrewPlayView>
                       title: "Done",
                       color: Theme.of(context).colorScheme.onSecondary,
                       onPressed: () {
+                        Provider.of<BrewMethodProvider>(context, listen: false)
+                            .clearProviderData();
                         navigatorKey.currentState!.pop();
                         navigatorKey.currentState!.pushReplacementNamed(
                           PageRouteNames.brewDonePage,
                           arguments: widget.recipeInfo,
                         );
-                        Provider.of<BrewMethodProvider>(context, listen: false)
-                            .clearProviderData();
+
                       }),
                   const Spacer(),
                 ],

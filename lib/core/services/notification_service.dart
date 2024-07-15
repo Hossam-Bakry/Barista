@@ -96,8 +96,6 @@ class NotificationService {
     final int id = 1,
     final bool locked = false,
   }) async {
-    String localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
-
     assert(!scheduled || (scheduled && interval != null));
 
     await AwesomeNotifications().createNotification(
@@ -119,47 +117,48 @@ class NotificationService {
       ),
       actionButtons: actionButtons,
       schedule: scheduled
-      //     ? NotificationCalendar.fromDate(
-      //         date: DateTime(
-      //             DateTime.now().year,
-      //             DateTime.now().month,
-      //             DateTime.now().day,
-      //             DateTime.now().hour,
-      //             DateTime.now().minute,
-      //             DateTime.now().second + interval!))
-      //     : null,
+          //     ? NotificationCalendar.fromDate(
+          //         date: DateTime(
+          //             DateTime.now().year,
+          //             DateTime.now().month,
+          //             DateTime.now().day,
+          //             DateTime.now().hour,
+          //             DateTime.now().minute,
+          //             DateTime.now().second + interval!))
+          //     : null,
           ? NotificationInterval(
-        interval: interval,
-        timeZone:
-        await AwesomeNotifications().getLocalTimeZoneIdentifier(),
-        preciseAlarm: true,
-      )
+              interval: interval,
+              timeZone:
+                  await AwesomeNotifications().getLocalTimeZoneIdentifier(),
+              preciseAlarm: true,
+            )
           : null,
     );
   }
 
   static Future<void> cancelAllNotifications() async {
-    try{
+    try {
       await AwesomeNotifications().cancelAllSchedules();
-    }catch(e){
+    } catch (e) {
       debugPrint(e.toString());
-    }try{
+    }
+    try {
       await AwesomeNotifications().cancelAll();
-    }catch(e){
+    } catch (e) {
       debugPrint(e.toString());
     }
   }
+
   static Future<void> cancelNotification({int id = 1}) async {
-
-    try{
+    try {
       await AwesomeNotifications().cancel(id);
-    }catch(e){
+    } catch (e) {
       debugPrint(e.toString());
-    }try{
+    }
+    try {
       await AwesomeNotifications().cancelSchedule(id);
-    }catch(e){
+    } catch (e) {
       debugPrint(e.toString());
     }
   }
-
 }
