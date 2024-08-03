@@ -6,6 +6,7 @@ import 'package:barista/core/services/snackbar_service.dart';
 import 'package:barista/featuers/home/provider/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -371,7 +372,9 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                     items: context.locale == const Locale("en")
                                         ? ["Fine", "Medium", "Extra Fine"]
                                         : ["جيد", "متوسط", "جيد جدا"],
-                                    initialItem: doseData.grinder,
+
+                                    initialItem: "Medium",
+                                    // initialItem: doseData.grinder,
                                     decoration: CustomDropdownDecoration(
                                       closedFillColor: Colors.transparent,
                                       closedSuffixIcon: Icon(
@@ -445,6 +448,11 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   flex: 2,
                                   child: TextFormField(
                                     controller: vm.brewsTimeController,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.deny(
+                                        RegExp("[a-zA-Z-*/+ا-ي]"),
+                                      )
+                                    ],
                                     textAlign: TextAlign.center,
                                     keyboardType:
                                         const TextInputType.numberWithOptions(
@@ -488,6 +496,13 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     textInputAction: TextInputAction.done,
                                     style: theme.textTheme.bodyLarge,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.deny(
+                                        RegExp("[a-zA-Z-*/+ا-ي]"),
+                                      )
+                                    ],
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
                                       hintText: "Enter value",
                                       contentPadding: const EdgeInsets.only(

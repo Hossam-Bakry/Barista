@@ -162,21 +162,49 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   int notificationTime = 0;
+  bool isPlay = false;
+  List<num> timeList = [];
+  int lastTime = 0;
+  getAllTime() {
+    NotificationService.cancelAllNotifications();
+
+    int cumulativeTime = 0; // تخزين الوقت التراكمي للإشعارات
+
+    for (int i = stepNumber; i < stepsDetailList.length; i++) {
+      int brewedTimeSeconds =
+          (double.parse(stepsDetailList[i].brewedTime).toInt()) * 60;
+
+      // حساب تأخير الإشعار بناءً على الفرق بين الوقت التراكمي والوقت الذي توقف فيه التايمر
+      int notificationDelay = cumulativeTime - initialTime;
+      // طباعة القيم للتحقق
+      print("notificationDelay: $notificationDelay");
+      print("initialTime: $initialTime");
+      print("cumulativeTime: $cumulativeTime");
+      print("brewedTimeSeconds: $brewedTimeSeconds");
+      // عرض الإشعار
+      NotificationService.showNotification(
+        id: i,
+        scheduled: true,
+        interval: notificationDelay,
+        title: "Next Step",
+        body: "Previous step: ${stepsDetailList[i].title}",
+      );
+
+      // تحديث الوقت التراكمي ليشمل وقت الخطوة الحالية
+      cumulativeTime += brewedTimeSeconds;
+    }
+  }
+
   Future<void> play() async {
-    notificationTime +=
-        (double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60;
-    print(notificationTime);
-    print(initialTime);
-    notificationTime = notificationTime - initialTime;
-    print(notificationTime);
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
-      NotificationService.showNotification(
-        scheduled: true,
-        interval: notificationTime,
-        title: "Next Step",
-        body: "previous step: ${stepsDetailList[stepNumber].title}",
-      );
+      getAllTime();
+      // NotificationService.showNotification(
+      //   scheduled: true,
+      //   interval: notificationTime,
+      //   title: "Next Step",
+      //   body: "previous step: ${stepsDetailList[stepNumber].title}",
+      // );
     }
     if (stepNumber == stepsDetailList.length - 1) {
       notificationTime = 0;
@@ -185,18 +213,19 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   pause() {
+    NotificationService.cancelAllNotifications();
     if (_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].stop();
-      NotificationService.cancelAllNotifications();
     }
     notifyListeners();
   }
 
   reset() {
+    NotificationService.cancelAllNotifications();
+
     for (var element in _controllersList) {
       element.reset();
     }
-    NotificationService.cancelAllNotifications();
     _stepNumber = 0;
     notifyListeners();
   }
@@ -245,9 +274,9 @@ class BrewMethodProvider extends ChangeNotifier {
 
   clearProviderData() {
     changeStartState(false);
-    controller.dispose();
+    controller?.dispose();
     for (var element in _controllersList) {
-      element.dispose();
+      element?.dispose();
     }
     notificationTime = 0;
     initialTime = 0;

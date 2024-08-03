@@ -89,12 +89,11 @@ class BrewResultView extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSecondary,
                       // onPressed: () => navigatorKey.currentState!.pop(),
                       onPressed: () {
-                        // navigatorKey.currentState!.pushNamedAndRemoveUntil(
-                        //   PageRouteNames.home,
-                        //       (route) => false,
-                        // );
                         navigatorKey.currentState!.pop();
-                        navigatorKey.currentState!.pop();
+                        navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                          PageRouteNames.home,
+                          (route) => false,
+                        );
 
                         Provider.of<BrewMethodProvider>(context, listen: false)
                             .clearProviderData();

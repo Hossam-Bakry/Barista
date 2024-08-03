@@ -254,7 +254,7 @@ class OwnRecipeRateView extends StatelessWidget {
                             style: theme.textTheme.bodyMedium,
                           ),
                           Text(
-                            "${(args[0].brewedTime * 60).ceil()} ${"my_own_recipe.secs".tr()}",
+                            "${(args[0].brewedTime * 60).toString().substring(0, 4)} ${"my_own_recipe.secs".tr()}",
                             style: theme.textTheme.bodyMedium!
                                 .copyWith(color: theme.primaryColor),
                           ),

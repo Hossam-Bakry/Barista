@@ -88,10 +88,21 @@ dependencies:
 
   awesome_notifications: ^0.8.2
 
+  # Cubit
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+
 
 
 
   lite_rolling_switch: ^1.0.1
+
+  flutter_background_service: any
+  flutter_background_service_android: any
+  flutter_background_service_ios: any
+
+  firebase_core: any
+  firebase_messaging: any
 
 flutter_launcher_icons:
   android: "launcher_icon"

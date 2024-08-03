@@ -39,7 +39,7 @@ class Routes {
             builder: (context) => ResetPasswordView(), settings: settings);
       case PageRouteNames.brewMethodDetails:
         return MaterialPageRoute(
-            builder: (context) => const BrewMethodsDetailsView(),
+            builder: (context) =>  BrewMethodsDetailsView(),
             settings: settings);
       case PageRouteNames.brewPlay:
         return MaterialPageRoute(

@@ -14,7 +14,7 @@ class NotificationService {
           defaultColor: const Color(0xFF9D50DD),
           ledColor: Colors.white,
           importance: NotificationImportance.Max,
-          channelShowBadge: true,
+          channelShowBadge: false,
           onlyAlertOnce: true,
           playSound: true,
           criticalAlerts: true,

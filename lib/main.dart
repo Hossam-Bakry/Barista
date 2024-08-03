@@ -3,23 +3,33 @@ import 'dart:io';
 import 'package:barista/core/config/application_theme.dart';
 import 'package:barista/core/config/page_route_names.dart';
 import 'package:barista/core/config/routes.dart';
+import 'package:barista/core/services/fcm.dart';
 import 'package:barista/core/services/loading_service.dart';
 import 'package:barista/core/services/notification_service.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'core/config/providers.dart';
+import 'core/services/background_service.dart';
+import 'firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await BackgroundService.init();
+  await Fcm.init();
   await NotificationService.initializeNotification();
-  HttpOverrides.global = MyHttpOverrides();
 
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -81,3 +91,5 @@ class MyHttpOverrides extends HttpOverrides{
       ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }
+
+

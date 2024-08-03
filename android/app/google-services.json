@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "980547744849",
+    "project_id": "barista-4d00e",
+    "storage_bucket": "barista-4d00e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980547744849:android:ae16d2cd470b207746b470",
+        "android_client_info": {
+          "package_name": "com.example.barista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdiFydky11b0GyXGL6Im3q29OvMzdLA9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

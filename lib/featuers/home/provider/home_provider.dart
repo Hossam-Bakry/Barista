@@ -73,6 +73,9 @@ class HomeProvider extends ChangeNotifier {
     );
   }
 
+  bool brewTimeError = false;
+  bool coffeeBeansError = false;
+
   String _profileImage = UserData().imagePath ?? "";
   late String _country;
   late String _originalCountry;
