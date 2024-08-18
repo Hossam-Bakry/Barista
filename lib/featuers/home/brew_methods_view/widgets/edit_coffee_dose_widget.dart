@@ -92,6 +92,9 @@ class EditCoffeeDoseWidget extends StatelessWidget {
         print(
           doseData.ratio.toString(),
         );
+        print(
+          doseData.grinder.toString(),
+        );
         print(vm.waterController.text);
         print(vm.percentageOfLoss);
         return SizedBox(
@@ -371,7 +374,7 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                     items: context.locale == const Locale("en")
                                         ? ["Fine", "Medium", "Extra Fine"]
                                         : ["جيد", "متوسط", "جيد جدا"],
-                                    initialItem: doseData.grinder,
+                                    initialItem: doseData.grinder.toString(),
                                     decoration: CustomDropdownDecoration(
                                       closedFillColor: Colors.transparent,
                                       closedSuffixIcon: Icon(

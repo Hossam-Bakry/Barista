@@ -74,7 +74,7 @@ class _BrewPlayViewState extends State<BrewPlayView>
 
   @override
   void dispose() {
-    provider.controller.dispose();
+    provider.controller?.dispose();
     _startController.dispose();
     _curvedAnimation.dispose();
     _animationStart.removeListener(() {});

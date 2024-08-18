@@ -149,54 +149,96 @@ class BrewMethodProvider extends ChangeNotifier {
     _controllersList = [];
     _totalTime = 0;
     for (var element in steps) {
-      _controllersList.add(
-        AnimationController(
-          duration: Duration(
-            seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+      if (((double.parse(element.brewedTime).toInt()) * 60) > 0) {
+        _controllersList.add(
+          AnimationController(
+            duration: Duration(
+              seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+            ),
+            vsync: v,
           ),
-          vsync: v,
-        ),
-      );
-      _totalTime += (double.parse(element.brewedTime).toInt() * 60);
+        );
+        _totalTime += (double.parse(element.brewedTime).toInt() * 60);
+      }
     }
   }
 
   int notificationTime = 0;
+  bool isPlay = false;
+  List<num> timeList = [];
+  int lastTime = 0;
+  getAllTime() {
+    int brewedTimeSeconds = 0;
+    bool isFirst = true;
+    NotificationService.cancelAllNotifications();
+    int previousTime = 0;
+    for (int j = 0; j < stepNumber; j++) {
+      previousTime +=
+          ((double.parse(stepsDetailList[j].brewedTime).toInt()) * 60);
+    }
+
+    for (int i = stepNumber; i < stepsDetailList.length; i++) {
+      brewedTimeSeconds +=
+          ((double.parse(stepsDetailList[i].brewedTime).toInt()) * 60);
+
+      if ((initialTime - previousTime) > 0 && isFirst) {
+        brewedTimeSeconds -= (initialTime - previousTime);
+      }
+      print("previousTime: $previousTime");
+      print("initialTime: $initialTime");
+      print("brewedTimeSeconds: $brewedTimeSeconds");
+      if (((double.parse(stepsDetailList[i].brewedTime).toInt()) * 60) > 0) {
+        NotificationService.showNotification(
+          id: i,
+          scheduled: true,
+          interval: brewedTimeSeconds,
+          title: "Next Step",
+          body: "Previous step: ${stepsDetailList[i].title}",
+        );
+      }
+
+      isFirst = false;
+    }
+  }
+
   Future<void> play() async {
-    notificationTime +=
-        (double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60;
-    print(notificationTime);
-    print(initialTime);
-    notificationTime = notificationTime - initialTime;
-    print(notificationTime);
     if (!_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].forward();
-      NotificationService.showNotification(
-        scheduled: true,
-        interval: notificationTime,
-        title: "Next Step",
-        body: "previous step: ${stepsDetailList[stepNumber].title}",
-      );
+      getAllTime();
+      // NotificationService.showNotification(
+      //   scheduled: true,
+      //   interval: notificationTime,
+      //   title: "Next Step",
+      //   body: "previous step: ${stepsDetailList[stepNumber].title}",
+      // );
     }
     if (stepNumber == stepsDetailList.length - 1) {
       notificationTime = 0;
     }
     notifyListeners();
+
+    if (((double.parse(stepsDetailList[_stepNumber].brewedTime).toInt()) * 60) >
+        0) {
+    } else {
+      // play();
+      // playNextStep(null);
+    }
   }
 
   pause() {
+    NotificationService.cancelAllNotifications();
     if (_controllersList[_stepNumber].isAnimating) {
       _controllersList[_stepNumber].stop();
-      NotificationService.cancelAllNotifications();
     }
     notifyListeners();
   }
 
   reset() {
+    NotificationService.cancelAllNotifications();
+
     for (var element in _controllersList) {
       element.reset();
     }
-    NotificationService.cancelAllNotifications();
     _stepNumber = 0;
     notifyListeners();
   }

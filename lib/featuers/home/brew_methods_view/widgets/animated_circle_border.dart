@@ -45,13 +45,12 @@ class _AnimatedCircleBorderState extends State<AnimatedCircleBorder>
     );
   }
 
-
   @override
   void dispose() {
-    for(var element in widget.controllersList){
+    for (var element in widget.controllersList) {
       element.dispose();
     }
-    _curvedAnimation.dispose();
+    // _curvedAnimation.dispose();
     _animationStart.removeListener(() {});
     super.dispose();
   }
@@ -215,12 +214,13 @@ class _WaterFlowState extends State<WaterFlow> with TickerProviderStateMixin {
   void initState() {
     super.initState();
   }
-@override
-  void dispose() {
 
+  @override
+  void dispose() {
     widget.controller.dispose();
     super.dispose();
   }
+
   @override
   void deactivate() {}
 

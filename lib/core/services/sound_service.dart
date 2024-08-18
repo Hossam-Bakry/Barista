@@ -16,8 +16,8 @@ class SoundService {
   }
 
   final AudioPlayer _player = AudioPlayer(
-    // prefix: 'assets/audio/',
-  );
+      // prefix: 'assets/audio/',
+      );
 
   Future<void> loadSounds() async {
     // await _player.load(
