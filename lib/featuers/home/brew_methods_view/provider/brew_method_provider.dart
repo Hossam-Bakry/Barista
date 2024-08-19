@@ -149,19 +149,58 @@ class BrewMethodProvider extends ChangeNotifier {
     _controllersList = [];
     _totalTime = 0;
     for (var element in steps) {
-      _controllersList.add(
-        AnimationController(
-          duration: Duration(
-            seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+      if (((double.parse(element.brewedTime).toInt()) * 60) > 0) {
+        _controllersList.add(
+          AnimationController(
+            duration: Duration(
+              seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+            ),
+            vsync: v,
           ),
-          vsync: v,
-        ),
-      );
-      _totalTime += (double.parse(element.brewedTime).toInt() * 60);
+        );
+        _totalTime += (double.parse(element.brewedTime).toInt() * 60);
+      }
     }
   }
 
   int notificationTime = 0;
+  bool isPlay = false;
+  List<num> timeList = [];
+  int lastTime = 0;
+  getAllTime() {
+    int brewedTimeSeconds = 0;
+    bool isFirst = true;
+    NotificationService.cancelAllNotifications();
+    int previousTime = 0;
+    for (int j = 0; j < stepNumber; j++) {
+      previousTime +=
+          ((double.parse(stepsDetailList[j].brewedTime).toInt()) * 60);
+    }
+
+    for (int i = stepNumber; i < stepsDetailList.length; i++) {
+      brewedTimeSeconds +=
+          ((double.parse(stepsDetailList[i].brewedTime).toInt()) * 60);
+
+      if ((initialTime - previousTime) > 0 && isFirst) {
+        brewedTimeSeconds -= (initialTime - previousTime);
+      }
+      print("previousTime: $previousTime");
+      print("initialTime: $initialTime");
+      print("brewedTimeSeconds: $brewedTimeSeconds");
+      if (((double.parse(stepsDetailList[i].brewedTime).toInt()) * 60) > 0) {
+        NotificationService.showNotification(
+          id: i,
+          scheduled: true,
+          interval: brewedTimeSeconds,
+          title: "Next Step",
+          body: "Previous step: ${stepsDetailList[i].title}",
+        );
+      }
+
+      isFirst = false;
+    }
+  }
+
   bool isPlay = false;
   List<num> timeList = [];
   int lastTime = 0;
@@ -210,6 +249,13 @@ class BrewMethodProvider extends ChangeNotifier {
       notificationTime = 0;
     }
     notifyListeners();
+
+    if (((double.parse(stepsDetailList[_stepNumber].brewedTime).toInt()) * 60) >
+        0) {
+    } else {
+      // play();
+      // playNextStep(null);
+    }
   }
 
   pause() {
@@ -274,9 +320,9 @@ class BrewMethodProvider extends ChangeNotifier {
 
   clearProviderData() {
     changeStartState(false);
-    controller?.dispose();
+    controller.dispose();
     for (var element in _controllersList) {
-      element?.dispose();
+      element.dispose();
     }
     notificationTime = 0;
     initialTime = 0;

@@ -1,12 +1,9 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:barista/core/services/notification_service.dart';
-import 'package:barista/featuers/home/brew_methods_view/cubit/brew_method_cubit.dart';
 import 'package:barista/featuers/home/brew_methods_view/widgets/brew_details_steps.dart';
 import 'package:barista/featuers/home/provider/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable_fab_lite/expandable_fab_lite.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -47,13 +44,13 @@ class BrewMethodsDetailsView extends StatelessWidget {
         ),
         child: BlocConsumer<BrewMethodCubit, BrewMethodState>(
           listener: (context, state) {
-            // if (state is BrewMethodSuccess) {
-            //   num++;
-            //   NotificationService.showNotification(
-            //       id: num, title: "title", body: "body");
-            //   print(num);
-            // }
-            // print(state);
+            if (state is BrewMethodSuccess) {
+              num++;
+              NotificationService.showNotification(
+                  id: num, title: "title", body: "body");
+              print(num);
+            }
+            print(state);
           },
           builder: (context, state) {
             var cubit = BrewMethodCubit.get(context);
