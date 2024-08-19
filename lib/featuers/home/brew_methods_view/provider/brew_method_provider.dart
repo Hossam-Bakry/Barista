@@ -158,7 +158,6 @@ class BrewMethodProvider extends ChangeNotifier {
         ),
       );
       if (((double.parse(element.brewedTime).toInt()) * 60) > 0) {
-
         _totalTime += (double.parse(element.brewedTime).toInt() * 60);
       }
     }
