@@ -201,38 +201,6 @@ class BrewMethodProvider extends ChangeNotifier {
     }
   }
 
-  bool isPlay = false;
-  List<num> timeList = [];
-  int lastTime = 0;
-  getAllTime() {
-    NotificationService.cancelAllNotifications();
-
-    int cumulativeTime = 0; // تخزين الوقت التراكمي للإشعارات
-
-    for (int i = stepNumber; i < stepsDetailList.length; i++) {
-      int brewedTimeSeconds =
-          (double.parse(stepsDetailList[i].brewedTime).toInt()) * 60;
-
-      // حساب تأخير الإشعار بناءً على الفرق بين الوقت التراكمي والوقت الذي توقف فيه التايمر
-      int notificationDelay = cumulativeTime - initialTime;
-      // طباعة القيم للتحقق
-      print("notificationDelay: $notificationDelay");
-      print("initialTime: $initialTime");
-      print("cumulativeTime: $cumulativeTime");
-      print("brewedTimeSeconds: $brewedTimeSeconds");
-      // عرض الإشعار
-      NotificationService.showNotification(
-        id: i,
-        scheduled: true,
-        interval: notificationDelay,
-        title: "Next Step",
-        body: "Previous step: ${stepsDetailList[i].title}",
-      );
-
-      // تحديث الوقت التراكمي ليشمل وقت الخطوة الحالية
-      cumulativeTime += brewedTimeSeconds;
-    }
-  }
 
   Future<void> play() async {
     if (!_controllersList[_stepNumber].isAnimating) {
