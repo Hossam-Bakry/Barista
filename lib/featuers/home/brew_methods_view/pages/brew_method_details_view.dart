@@ -1,4 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:barista/core/services/notification_service.dart';
+import 'package:barista/featuers/home/brew_methods_view/cubit/brew_method_cubit.dart';
 import 'package:barista/featuers/home/brew_methods_view/widgets/brew_details_steps.dart';
 import 'package:barista/featuers/home/provider/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,8 +15,6 @@ import '../../../../../core/extensions/extensions.dart';
 import '../../../../../domain/entities/home/recipe_info_entity.dart';
 import '../../../../../main.dart';
 import '../../../../core/config/constants.dart';
-import '../../../../core/services/notification_service.dart';
-import '../cubit/brew_method_cubit.dart';
 import '../cubit/brew_method_state.dart';
 import '../provider/brew_method_provider.dart';
 import '../widgets/brew_details_sliders.dart';
@@ -35,8 +35,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: (args.brewDeviceImage == null ||
-                  args.brewDeviceImage.isEmpty)
+          image: (args.brewDeviceImage == null || args.brewDeviceImage.isEmpty)
               ? const AssetImage("assets/images/brew_method_background.png")
               : NetworkImage("${Constants.baseURL}${args.brewDeviceImage}")
                   as ImageProvider,
@@ -68,8 +67,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButtonLocation:
-        FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ExpandableFab(
           fabSize: 50,
           // heroTag: "heroTag",
@@ -152,8 +150,8 @@ class BrewMethodsDetailsView extends StatelessWidget {
             FadeInUp(
               delay: const Duration(milliseconds: 150),
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 decoration: BoxDecoration(
                   // color: Color(0xFF0E382F),
                   color: theme.colorScheme.onSecondary,
@@ -172,7 +170,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                           onTap: () {
                             Future.delayed(
                               const Duration(milliseconds: 200),
-                                  () {
+                              () {
                                 viewModel.setDefaultDoseValues(args);
                                 showModalBottomSheet(
                                   context: context,
@@ -201,8 +199,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                               children: [
                                 Text(
                                   "recipe_data.coffee_beans".tr(),
-                                  style:
-                                  theme.textTheme.bodyLarge!.copyWith(
+                                  style: theme.textTheme.bodyLarge!.copyWith(
                                     color: theme.colorScheme.onSecondary,
                                   ),
                                 ),
@@ -212,7 +209,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                 CircleAvatar(
                                   radius: 13,
                                   backgroundColor:
-                                  theme.colorScheme.onSecondary,
+                                      theme.colorScheme.onSecondary,
                                   child: Icon(
                                     Icons.add,
                                     size: 20,
@@ -231,8 +228,8 @@ class BrewMethodsDetailsView extends StatelessWidget {
                     Text(
                       "${args.coffee.toString()} g",
                       // "25 g",
-                      style: theme.textTheme.headlineLarge!
-                          .copyWith(fontSize: 24),
+                      style:
+                          theme.textTheme.headlineLarge!.copyWith(fontSize: 24),
                     ),
                     const SizedBox(height: 15),
                     // Text(
@@ -249,7 +246,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
               onTap: () {
                 Future.delayed(
                   const Duration(milliseconds: 200),
-                      () {
+                  () {
                     viewModel.setDefaultDoseValues(args);
                     showModalBottomSheet(
                       context: context,
@@ -287,8 +284,8 @@ class BrewMethodsDetailsView extends StatelessWidget {
               child: FadeInUp(
                 delay: const Duration(milliseconds: 200),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 20, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
                     // color: Color(0xFF0E382F),
                     color: theme.colorScheme.onSecondary,
@@ -304,8 +301,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                             width: mediaQuery.size.width * 0.18,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "recipe_data.coffee".tr(),
@@ -316,8 +312,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                   "${args.coffee.toInt()} g",
                                   textAlign: TextAlign.center,
                                   style: theme.textTheme.bodyLarge!
-                                      .copyWith(
-                                      color: theme.primaryColor),
+                                      .copyWith(color: theme.primaryColor),
                                 ),
                               ],
                             ),
@@ -331,8 +326,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                             width: mediaQuery.size.width * 0.18,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "recipe_data.water".tr(),
@@ -343,8 +337,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                   "${args.water} ml",
                                   textAlign: TextAlign.center,
                                   style: theme.textTheme.bodyLarge!
-                                      .copyWith(
-                                      color: theme.primaryColor),
+                                      .copyWith(color: theme.primaryColor),
                                 ),
                               ],
                             ),
@@ -358,8 +351,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                             width: mediaQuery.size.width * 0.18,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "recipe_data.grinder".tr(),
@@ -370,8 +362,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                   args.grinder,
                                   textAlign: TextAlign.center,
                                   style: theme.textTheme.bodyLarge!
-                                      .copyWith(
-                                      color: theme.primaryColor),
+                                      .copyWith(color: theme.primaryColor),
                                 ),
                               ],
                             ),
@@ -385,8 +376,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                             width: mediaQuery.size.width * 0.18,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "recipe_data.brew_time".tr(),
@@ -396,22 +386,20 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
                                       args.brewedTime.toString(),
                                       // "01:20",
                                       textAlign: TextAlign.center,
                                       style: theme.textTheme.bodyLarge!
-                                          .copyWith(
-                                          color: theme.primaryColor),
+                                          .copyWith(color: theme.primaryColor),
                                     ),
                                     Text(
                                       "recipe_data.minute".tr(),
                                       textAlign: TextAlign.center,
                                       style: theme.textTheme.bodySmall
-                                          ?.copyWith(
-                                          color: theme.primaryColor),
+                                          ?.copyWith(color: theme.primaryColor),
                                     ),
                                   ],
                                 ),
@@ -445,7 +433,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
             ),
           ],
         ).setHorizontalAndVerticalPadding(context, 0.025, 0.04),
-      )
+      ),
     );
   }
 }
