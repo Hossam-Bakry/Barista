@@ -4,7 +4,6 @@ import 'package:expandable_fab_lite/expandable_fab_lite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../core/services/notification_service.dart';
 import '../../../../core/services/web_service.dart';
 import '../../../../data/data_source/home/send_rate_data_source.dart';
@@ -172,6 +171,18 @@ class BrewMethodProvider extends ChangeNotifier {
     bool isFirst = true;
     NotificationService.cancelAllNotifications();
     int previousTime = 0;
+    if (((double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) *
+            60) <=
+        0) {
+      NotificationService.showNotification(
+        id: stepNumber,
+        scheduled: false,
+        interval: (brewedTimeSeconds + 10),
+        title: "Next Step",
+        body: "Need Action to be done",
+      );
+    }
+
     for (int j = 0; j < stepNumber; j++) {
       previousTime +=
           ((double.parse(stepsDetailList[j].brewedTime).toInt()) * 60);
@@ -200,7 +211,6 @@ class BrewMethodProvider extends ChangeNotifier {
       isFirst = false;
     }
   }
-
 
   Future<void> play() async {
     if (!_controllersList[_stepNumber].isAnimating) {
