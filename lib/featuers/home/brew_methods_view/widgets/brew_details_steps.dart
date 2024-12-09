@@ -105,7 +105,15 @@ class BrewDetailsSteps extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text(timeFullFormatV3(recipeInfoEntity.recipeSteps[index].brewedTime),
+                              Text(
+                                // timeFormatV4(
+                                //   recipeInfoEntity
+                                //       .recipeSteps[index].brewedTime,
+                                // ),
+                                timeFormatV4(
+                                  recipeInfoEntity
+                                      .recipeSteps[index].brewedTime,
+                                ),
                                 textAlign: TextAlign.end,
                                 style: theme.textTheme.bodyLarge,
                               ),

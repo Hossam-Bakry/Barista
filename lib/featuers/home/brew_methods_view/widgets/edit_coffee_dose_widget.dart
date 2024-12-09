@@ -371,7 +371,10 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                     items: context.locale == const Locale("en")
                                         ? ['Fine', 'Medium', 'Extra Fine']
                                         : ["جيد", "متوسط", "جيد جدا"],
-                                    initialItem:context.locale == const Locale("en")? "Fine" : "جيد",
+                                    initialItem:
+                                        context.locale == const Locale("en")
+                                            ? "Fine"
+                                            : "جيد",
                                     decoration: CustomDropdownDecoration(
                                       closedFillColor: Colors.transparent,
                                       closedSuffixIcon: Icon(
@@ -514,10 +517,12 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                       double.parse(vm.coffeeController.text),
                                   water: double.parse(vm.waterController.text),
                                   ratio: "1: ${vm.ratioController.text}",
+                                  // Todo: handle this issue
                                   drewTime: timeFullFormat(
-                                      double.parse(vm.brewsTimeController.text)
-                                          .toInt()
-                                          .toString()),
+                                    double.parse(vm.brewsTimeController.text)
+                                        .toInt()
+                                        .toString(),
+                                  ),
                                   // double.parse(vm.brewsTimeController.text),
                                   grinder: vm.grinderValue,
                                   coffeeBeans:

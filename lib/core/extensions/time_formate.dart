@@ -4,14 +4,27 @@ double timeFormat(String time) {
   return DateFormat("hh:mm:ss").parse(time).minute.ceilToDouble();
 }
 
+// String timeFullFormat(String time) {
+//   print(time.runtimeType);
+//
+//   var formatTime = DateTime.parse("20240629 00:0$time:00");
+//   return DateFormat.Hms().format(formatTime);
+// }
 String timeFullFormat(String time) {
-  print(time.runtimeType);
+  var formatTimes = time.split(':');
 
-  var formatTime = DateTime.parse("20240629 00:0$time:00");
-  return DateFormat.Hms().format(formatTime);
+  DateTime dateTime = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    int.tryParse(formatTimes.isNotEmpty ? formatTimes[0] : "0") ?? 0,
+    int.tryParse(formatTimes.length > 1 ? formatTimes[1] : "0") ?? 0,
+    int.tryParse(formatTimes.length > 2 ? formatTimes[2] : "0") ?? 0,
+  );
+  print("time amr ${dateTime.hour}:${dateTime.minute}:${dateTime.second}");
+  return dateTime.toString();
+
 }
-
-
 
 String timeFullFormatV3(String time) {
   try {
@@ -32,6 +45,30 @@ String timeFullFormatV3(String time) {
   }
 }
 
+String timeFormatV4(String time) {
+  var formatTimes = time.split(':');
+  print("convert time: $time");
+  print("format times: $formatTimes");
+
+  String timeFormat = "";
+  if (formatTimes.isNotEmpty && formatTimes[0] != "00") {
+    timeFormat = "${formatTimes[0]}Hrs ";
+    print("format time1: $timeFormat");
+  }
+
+  if (formatTimes.length > 1 && formatTimes[1] != "00") {
+    timeFormat += "${formatTimes[1]}Mins ";
+    print("format time2: $timeFormat");
+  }
+
+  if (formatTimes.length > 2 && formatTimes[2] != "00") {
+    timeFormat += ":${formatTimes[2]}Secs ";
+    print("format time3: $timeFormat");
+  }
+
+  return timeFormat;
+}
+
 String _formatTime(int hours, int minutes, int seconds) {
   List<String> parts = [];
 
@@ -46,7 +83,6 @@ String _formatTime(int hours, int minutes, int seconds) {
 
   return parts.join(" , ");
 }
-
 
 //
 //
@@ -84,4 +120,3 @@ String _formatTime(int hours, int minutes, int seconds) {
 //
 //   return parts.join(" , ");
 // }
-

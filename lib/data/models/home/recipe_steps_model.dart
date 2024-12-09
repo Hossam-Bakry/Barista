@@ -8,6 +8,7 @@ class RecipeStepsModel extends RecipeSteps {
     required super.description,
     required super.stepLogo,
     required super.brewedTime,
+    required super.brewedTimeDateTime,
   });
 
   factory RecipeStepsModel.fromJson(Map<String, dynamic> json) =>
@@ -16,6 +17,9 @@ class RecipeStepsModel extends RecipeSteps {
         title: json["title"] ?? "",
         description: json["description"] ?? "",
         stepLogo: json["logo"] ?? "",
-        brewedTime: timeFullFormat(json["drewTime"] ?? "").toString(),
+        // brewedTime: timeFormatV4(json["drewTime"] ?? "").toString(),
+        brewedTime: json["drewTime"],
+        brewedTimeDateTime: timeFullFormat(json["drewTime"] ?? "").toString(),
+        // brewedTime: "2020"
       );
 }

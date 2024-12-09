@@ -149,16 +149,23 @@ class BrewMethodProvider extends ChangeNotifier {
     _controllersList = [];
     _totalTime = 0;
     for (var element in steps) {
+      var format = element.brewedTime.split(":");
+
+      var sec = int.parse(format[0]) * 60 * 60;
+      sec += int.parse(format[1]) * 60;
+
+      sec += int.parse(format[2]);
+
       _controllersList.add(
         AnimationController(
           duration: Duration(
-            seconds: ((double.parse(element.brewedTime).toInt()) * 60),
+            seconds: sec,
           ),
           vsync: v,
         ),
       );
-      if (((double.parse(element.brewedTime).toInt()) * 60) > 0) {
-        _totalTime += (double.parse(element.brewedTime).toInt() * 60);
+      if (sec > 0) {
+        _totalTime += sec;
       }
     }
   }
@@ -167,6 +174,7 @@ class BrewMethodProvider extends ChangeNotifier {
   bool isPlay = false;
   List<num> timeList = [];
   int lastTime = 0;
+
   getAllTime() {
     int brewedTimeSeconds = 0;
     bool isFirst = true;
@@ -311,7 +319,6 @@ class BrewMethodProvider extends ChangeNotifier {
   }
 
   String formatDuration(int totalSeconds) {
-
     print("totalSeconds: $totalSeconds");
 
     int hours = totalSeconds ~/ 3600;
