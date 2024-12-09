@@ -62,7 +62,7 @@ void imageGrapper(
                     child: Text(
                       'Take photo from camera or download it from the photo gallery',
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyText1!.copyWith(),
+                      style: theme.textTheme.bodyMedium?.copyWith(),
                     ),
                   ),
                   const Spacer(
@@ -151,7 +151,7 @@ takeImageFromGallary(
         content: Text(
           'permissions.desc_image'.tr(),
           // ignore: use_build_context_synchronously
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -171,7 +171,7 @@ takeImageFromGallary(
         content: Text(
           'permissions.desc_image'.tr(),
           // ignore: use_build_context_synchronously
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -213,7 +213,7 @@ takeImageFromCamera(
         // ignore: use_build_context_synchronously
         content: Text(
           'permissions.desc_camera'.tr(),
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
