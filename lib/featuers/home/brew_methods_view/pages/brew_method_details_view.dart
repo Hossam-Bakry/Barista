@@ -31,7 +31,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
     var vm = Provider.of<BrewMethodProvider>(context);
     var viewModel = Provider.of<HomeProvider>(context);
     var args = ModalRoute.of(context)!.settings.arguments as RecipeInfoEntity;
-
+    print(args.brewedTime);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -384,23 +384,22 @@ class BrewMethodsDetailsView extends StatelessWidget {
                                   style: theme.textTheme.bodySmall,
                                 ),
                                 const SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                Wrap(
+
                                   children: [
                                     Text(
-                                      args.brewedTime.toString(),
+                                      args.brewedTime,
                                       // "01:20",
                                       textAlign: TextAlign.center,
                                       style: theme.textTheme.bodyLarge!
                                           .copyWith(color: theme.primaryColor),
                                     ),
-                                    Text(
-                                      "recipe_data.minute".tr(),
-                                      textAlign: TextAlign.center,
-                                      style: theme.textTheme.bodySmall
-                                          ?.copyWith(color: theme.primaryColor),
-                                    ),
+                                    // Text(
+                                    //   "recipe_data.minute".tr(),
+                                    //   textAlign: TextAlign.center,
+                                    //   style: theme.textTheme.bodySmall
+                                    //       ?.copyWith(color: theme.primaryColor),
+                                    // ),
                                   ],
                                 ),
                               ],

@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/config/constants.dart';
 import '../../../../domain/entities/home/recipe_info_entity.dart';
 
 class MyOwnRecipeCard extends StatelessWidget {
@@ -157,7 +158,9 @@ class MyOwnRecipeCard extends StatelessWidget {
             //   )),
             // ),
             // if (recipeDeviceData.brewDeviceImage.isEmpty)
-            Image.asset(vm.getDeviceImage(0)),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(Constants.baseURL+recipeDeviceData.brewDeviceImage)),
             // if (recipeDeviceData.brewDeviceImage.isNotEmpty)
             //   Image.network(
             //       "${Constants.baseURL}${recipeDeviceData.brewDeviceImage}"),

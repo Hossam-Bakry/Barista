@@ -68,34 +68,34 @@ class BrewMethodsView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 40,
-            child: TextField(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                hintText: "Brew Guide , Methods , Roaster ..",
-                hintStyle: theme.textTheme.bodyMedium,
-                filled: true,
-                fillColor: Colors.black26,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-          ).setOnlyPadding(context, 0.02, 0.03, 0.0, 0.0),
+          // SizedBox(
+          //   height: 40,
+          //   child: TextField(
+          //     decoration: InputDecoration(
+          //       contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          //       prefixIcon: const Icon(
+          //         Icons.search,
+          //         color: Colors.white,
+          //       ),
+          //       hintText: "Brew Guide , Methods , Roaster ..",
+          //       hintStyle: theme.textTheme.bodyMedium,
+          //       filled: true,
+          //       fillColor: Colors.black26,
+          //       enabledBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(12),
+          //         borderSide: BorderSide.none,
+          //       ),
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(12),
+          //         borderSide: BorderSide.none,
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(12),
+          //         borderSide: BorderSide.none,
+          //       ),
+          //     ),
+          //   ),
+          // ).setOnlyPadding(context, 0.02, 0.03, 0.0, 0.0),
           Text(
             "home.barista_methods".tr(),
             style: theme.textTheme.titleLarge,

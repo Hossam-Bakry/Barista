@@ -25,7 +25,6 @@ class BrewItemWidget extends StatelessWidget {
       delay: Duration(milliseconds: (index * 50 + 100)),
       child: Container(
         alignment: Alignment.bottomCenter,
-        padding: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           image: DecorationImage(
@@ -44,11 +43,27 @@ class BrewItemWidget extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Text(
-          recipeInfoEntity.deviceName,
-          style: theme.textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          height: 300,
+          width: double.infinity,
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+
+            gradient: LinearGradient(colors: [
+              theme.colorScheme.secondary,
+              Colors.transparent,
+              Colors.transparent
+            ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          )
+          ,
+          child: Text(
+            recipeInfoEntity.deviceName,
+            style: theme.textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
         ),
       ),

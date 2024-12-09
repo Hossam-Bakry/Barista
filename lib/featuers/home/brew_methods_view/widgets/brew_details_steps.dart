@@ -7,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/extensions/time_formate.dart';
 import '../../../../domain/entities/home/recipe_info_entity.dart';
 
 class BrewDetailsSteps extends StatelessWidget {
@@ -104,8 +105,7 @@ class BrewDetailsSteps extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text(
-                                "${double.parse(recipeInfoEntity.recipeSteps[index].brewedTime).toInt() * 60} sec",
+                              Text(timeFullFormatV3(recipeInfoEntity.recipeSteps[index].brewedTime),
                                 textAlign: TextAlign.end,
                                 style: theme.textTheme.bodyLarge,
                               ),

@@ -1,5 +1,6 @@
 import 'package:barista/core/services/sound_service.dart';
 import 'package:custom_timer/custom_timer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable_fab_lite/expandable_fab_lite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -171,8 +172,7 @@ class BrewMethodProvider extends ChangeNotifier {
     bool isFirst = true;
     NotificationService.cancelAllNotifications();
     int previousTime = 0;
-    if (((double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) *
-            60) <=
+    if (((double.parse(stepsDetailList[stepNumber].brewedTime).toInt()) * 60) <=
         0) {
       NotificationService.showNotification(
         id: stepNumber,
@@ -308,6 +308,31 @@ class BrewMethodProvider extends ChangeNotifier {
     _rate = 0;
     _stepNumber = 0;
     _controllersList = [];
+  }
+
+  String formatDuration(int totalSeconds) {
+
+    print("totalSeconds: $totalSeconds");
+
+    int hours = totalSeconds ~/ 3600;
+    int minutes = (totalSeconds % 3600) ~/ 60;
+    int seconds = totalSeconds % 60;
+
+    String formattedTime = '';
+
+    if (hours > 0) {
+      formattedTime += '${hours} ${"rate.hours".tr()}';
+    }
+    if (minutes > 0) {
+      if (formattedTime.isNotEmpty) formattedTime += ' : ';
+      formattedTime += '${minutes} ${"rate.minute".tr()}';
+    }
+    if (seconds > 0 || formattedTime.isEmpty) {
+      if (formattedTime.isNotEmpty) formattedTime += ' : ';
+      formattedTime += '${seconds} ${"rate.secs".tr()}';
+    }
+
+    return formattedTime;
   }
 
 // Future<void> isFinishedAnimation({

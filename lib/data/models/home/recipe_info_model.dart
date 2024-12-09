@@ -19,17 +19,18 @@ class RecipeInfoModel extends RecipeInfoEntity {
 
   factory RecipeInfoModel.fromJson(Map<String, dynamic> json) =>
       RecipeInfoModel(
-        id: json["id"],
-        deviceName: json["name"] ?? "",
-        brewDeviceImage: json["imagePath"],
+          id: json["id"],
+          deviceName: json["name"] ?? "",
+          brewDeviceImage: json["imagePath"],
           coffee: num.parse(json["coffee"].toStringAsFixed(2)),
           water: json["water"],
           lossPercentage: json["lossPercentage"] ?? 0,
           ratio: json["ratio"],
-          brewedTime: timeFormat(json["drewTime"]).toString(),
+          // brewedTime: timeFormat(json["drewTime"]).toString(),
+          brewedTime: timeFullFormatV3(json["drewTime"]).toString(),
           grinder: json["grinder"] ?? "",
-        recipeSteps: (json["steps"] as List)
-            .map((e) => RecipeStepsModel.fromJson(e))
-            .toList(),
+          recipeSteps: (json["steps"] as List)
+              .map((e) => RecipeStepsModel.fromJson(e))
+              .toList(),
           createdAt: json["creationDate"]);
 }

@@ -16,6 +16,6 @@ class RecipeStepsModel extends RecipeSteps {
         title: json["title"] ?? "",
         description: json["description"] ?? "",
         stepLogo: json["logo"] ?? "",
-        brewedTime: timeFormat(json["drewTime"] ?? "").toString(),
+        brewedTime: timeFullFormat(json["drewTime"] ?? "").toString(),
       );
 }

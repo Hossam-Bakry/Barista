@@ -369,9 +369,9 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   flex: 4,
                                   child: CustomDropdown(
                                     items: context.locale == const Locale("en")
-                                        ? ["Fine", "Medium", "Extra Fine"]
+                                        ? ['Fine', 'Medium', 'Extra Fine']
                                         : ["جيد", "متوسط", "جيد جدا"],
-                                    initialItem: doseData.grinder.toString(),
+                                    initialItem:context.locale == const Locale("en")? "Fine" : "جيد",
                                     decoration: CustomDropdownDecoration(
                                       closedFillColor: Colors.transparent,
                                       closedSuffixIcon: Icon(

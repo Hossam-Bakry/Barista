@@ -67,6 +67,8 @@
     "review_your_recipe": "Review the taste of your coffee",
     "brew_time": "Brew Time",
     "secs": "Secs",
+    "minute": "Min",
+    "hours": "Hrs",
     "rating": "Rating",
     "add_note": "Add Note ..",
     "send_rate": "Send Rate",
@@ -85,6 +87,7 @@
     "brew_time": "Brew Time",
     "secs": "Secs",
     "rating": "Rating",
+    "additional_info": "Additional Information about this coffee",
     "add_note": "Add Note .."
   },
   "profile": {

@@ -342,7 +342,7 @@ class BrewResultView extends StatelessWidget {
                             style: theme.textTheme.bodyMedium,
                           ),
                           Text(
-                            "${(double.parse(args.brewedTime).toInt() * 60)} ${"rate.secs".tr()}",
+                            vm.formatDuration(double.parse(args.brewedTime).toInt() * 60),
                             style: theme.textTheme.bodyMedium!
                                 .copyWith(color: theme.primaryColor),
                           ),

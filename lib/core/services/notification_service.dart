@@ -101,7 +101,7 @@ class NotificationService {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         displayOnBackground: true,
-        displayOnForeground: true,
+        displayOnForeground: false,
         id: id,
         channelKey: 'basic_channel',
         title: title,

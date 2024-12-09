@@ -52,19 +52,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCdiFydky11b0GyXGL6Im3q29OvMzdLA9A',
-    appId: '1:980547744849:android:ae16d2cd470b207746b470',
+    appId: '1:980547744849:android:7f8b53c7eaad392246b470',
     messagingSenderId: '980547744849',
     projectId: 'barista-4d00e',
-    storageBucket: 'barista-4d00e.appspot.com',
+    storageBucket: 'barista-4d00e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDXnqIc304UQ8rXabrN2CKI7zrtyCMH_T8',
-    appId: '1:980547744849:ios:b99df59beca222a346b470',
+    appId: '1:980547744849:ios:c10bcca19dfcfdb946b470',
     messagingSenderId: '980547744849',
     projectId: 'barista-4d00e',
-    storageBucket: 'barista-4d00e.appspot.com',
-    iosBundleId: 'com.barista.privateWork',
+    storageBucket: 'barista-4d00e.firebasestorage.app',
+    iosBundleId: 'com.test.barista',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
