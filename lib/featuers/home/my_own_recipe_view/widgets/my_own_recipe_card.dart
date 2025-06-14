@@ -29,7 +29,7 @@ class MyOwnRecipeCard extends StatelessWidget {
         milliseconds: 100 + ((index + 1) * 50),
       ),
       child: Container(
-        height: 120,
+        height: 130,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
         decoration: BoxDecoration(

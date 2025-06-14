@@ -26,6 +26,28 @@ String timeFullFormat(String time) {
 
 }
 
+String parseTimeFromController(String time) {
+  // Split the time from the controller text
+  var formatTimes = time.split(':');
+
+  // Create a DateTime object with the parsed values
+  DateTime dateTime = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    int.tryParse(formatTimes.isNotEmpty ? formatTimes[0] : "0") ?? 0,
+    int.tryParse(formatTimes.length > 1 ? formatTimes[1] : "0") ?? 0,
+    int.tryParse(formatTimes.length > 2 ? formatTimes[2] : "0") ?? 0,
+  );
+
+  // Print the time for debugging
+  print("time amr ${dateTime.hour}:${dateTime.minute}:${dateTime.second}");
+
+  // Return the DateTime as a string
+  return dateTime.toString();
+}
+
+
 String timeFullFormatV3(String time) {
   try {
     var parsedTime = DateFormat("HH:mm:ss").parse(time);

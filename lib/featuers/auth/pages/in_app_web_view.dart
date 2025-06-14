@@ -47,7 +47,6 @@ class _InAppWebViewWidgetState extends State<InAppWebViewWidget> {
           print(jsonDecode(tokenFromJSEvaluation ?? "")["data"]["token"]);
           Provider.of<AuthProvider>(context, listen: false).setToken(
               jsonDecode(tokenFromJSEvaluation ?? "")["data"]["token"]);
-
           controller.clearHistory();
         }
       },

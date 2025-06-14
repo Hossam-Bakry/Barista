@@ -18,11 +18,17 @@ import '../../../../domain/entities/profile/user_data.dart';
 import '../../provider/home_provider.dart';
 import '../widgets/brew_item_widget.dart';
 
-class BrewMethodsView extends StatelessWidget {
-  UserData _userData = UserData();
-  final Base64Codec base64 = const Base64Codec();
-
+class BrewMethodsView extends StatefulWidget {
   BrewMethodsView({super.key});
+
+  @override
+  State<BrewMethodsView> createState() => _BrewMethodsViewState();
+}
+
+class _BrewMethodsViewState extends State<BrewMethodsView> {
+  UserData _userData = UserData();
+
+  final Base64Codec base64 = const Base64Codec();
 
   @override
   Widget build(BuildContext context) {
@@ -36,27 +42,33 @@ class BrewMethodsView extends StatelessWidget {
           const SizedBox(width: 20),
           SvgPicture.asset(AppIcons.baristaTitle),
           const Spacer(),
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.primaryColor,
-                width: 2,
-              ),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: (_userData.imagePath == null)
-                    ? (provider.profileImage.isEmpty)
-                        ? const AssetImage(
-                            "assets/images/profile.png",
-                          ) as ImageProvider
-                        : MemoryImage(
-                            base64.decode(provider.profileImage),
-                          )
-                    : NetworkImage(
-                        "${Constants.baseURL}${_userData.imagePath}"),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, PageRouteNames.home);
+              provider.changeIndex(2);
+            },
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: theme.primaryColor,
+                  width: 2,
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: (_userData.imagePath == null)
+                      ? (provider.profileImage.isEmpty)
+                          ? const AssetImage(
+                              "assets/images/profile.png",
+                            ) as ImageProvider
+                          : MemoryImage(
+                              base64.decode(provider.profileImage),
+                            )
+                      : NetworkImage(
+                          "${Constants.baseURL}${_userData.imagePath}"),
+                ),
               ),
             ),
           ),

@@ -458,7 +458,7 @@ class RegisterView extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Please provide here the mail that you got a code",
+                "auth.pls_enter_your_email".tr(),
                 style: theme.textTheme.titleLarge!.copyWith(
                   color: theme.primaryColor,
                   fontSize: 18,
@@ -469,7 +469,7 @@ class RegisterView extends StatelessWidget {
                 // width: mediaQuery.size.width * 0.7,
                 child: CustomTextField(
                   controller: reActivateController,
-                  hint: 'Enter your E-mail',
+                  hint: 'auth.enter_your_email'.tr(),
                   action: TextInputAction.done,
                   onValidate: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -492,7 +492,7 @@ class RegisterView extends StatelessWidget {
                 height: mediaQuery.size.height * 0.02,
               ),
               SolidRoundedButton(
-                title: "Verify account",
+                title: "auth.verify_email".tr(), // "Verify account",
                 height: 45,
                 color: theme.primaryColor,
                 textColor: theme.colorScheme.onSecondary,

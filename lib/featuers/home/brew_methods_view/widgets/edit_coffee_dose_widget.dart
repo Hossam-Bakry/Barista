@@ -82,6 +82,10 @@ class EditCoffeeDoseWidget extends StatelessWidget {
     Person.twentyFive: "1: 25",
   };
 
+  int selectedHour = 0;
+  int selectedMinute = 0;
+  int selectedSecond = 0;
+
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
@@ -219,13 +223,13 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   flex: 2,
                                   child: TextFormField(
                                     controller: vm.coffeeController,
+
                                     // enabled: false,
                                     textAlign: TextAlign.center,
                                     style: theme.textTheme.bodyLarge,
                                     keyboardType:
                                         const TextInputType.numberWithOptions(
                                       decimal: true,
-                                      signed: true,
                                     ),
                                     textInputAction: TextInputAction.done,
                                     onChanged: (value) {
@@ -270,12 +274,14 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: TextFormField(
+                                    onTapOutside: (event) {
+                                      FocusScope.of(context).unfocus();
+                                    },
                                     controller: vm.waterController,
                                     textAlign: TextAlign.center,
                                     keyboardType:
-                                        const TextInputType.numberWithOptions(
+                                    const TextInputType.numberWithOptions(
                                       decimal: true,
-                                      signed: true,
                                     ),
                                     textInputAction: TextInputAction.done,
                                     style: theme.textTheme.bodyLarge,
@@ -369,8 +375,8 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   flex: 4,
                                   child: CustomDropdown(
                                     items: context.locale == const Locale("en")
-                                        ? ['Fine', 'Medium', 'Extra Fine']
-                                        : ["جيد", "متوسط", "جيد جدا"],
+                                        ? ['Fine', 'Medium', 'Coarse']
+                                        : ["جيد", "متوسط", "خشن"],
                                     initialItem:
                                         context.locale == const Locale("en")
                                             ? "Fine"
@@ -444,30 +450,124 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   ),
                                 ),
                                 // if (isDropDown == false)
-                                Expanded(
-                                  flex: 2,
-                                  child: TextFormField(
-                                    controller: vm.brewsTimeController,
-                                    textAlign: TextAlign.center,
-                                    keyboardType:
-                                        const TextInputType.numberWithOptions(
-                                      decimal: true,
-                                      signed: true,
-                                    ),
-                                    textInputAction: TextInputAction.done,
-                                    style: theme.textTheme.bodyLarge,
-                                    // initialValue: vm.water.toString(),
-                                    decoration: InputDecoration(
-                                      hintText: "Enter value",
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 10, right: 10, top: 15),
-                                      hintStyle: theme.textTheme.bodyMedium,
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                    ),
+
+                        Expanded(
+                        flex: 3,
+                        child: GestureDetector(
+                          onTap: () async {
+                            final time = await showDialog(
+                              context: context,
+                              builder: (context) => SimpleDialog(
+                                backgroundColor: theme.colorScheme.onSecondary,
+                                title:  Text('recipe_data.selected_time'.tr()),
+                                children: [
+                                  StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            children: [
+                                               Text('recipe_data.hours'.tr()),
+                                              DropdownButton<int>(
+                                                value: selectedHour,
+                                                dropdownColor:  theme.colorScheme.onSecondary,
+
+                                                items: List.generate(100, (index) => index) // السماح بـ 100 ساعة كحد أقصى.
+                                                    .map((e) => DropdownMenuItem(
+                                                  value: e,
+                                                  child: Text('$e'),
+                                                ))
+                                                    .toList(),
+                                                onChanged: (value) {
+                                                  selectedHour = value!;
+                                                  setState(() {});
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                               Text('recipe_data.minutes'.tr()),
+                                              DropdownButton<int>(
+                                                value: selectedMinute,
+                                                dropdownColor:  theme.colorScheme.onSecondary,
+
+                                                items: List.generate(60, (index) => index)
+                                                    .map((e) => DropdownMenuItem(
+                                                  value: e,
+                                                  child: Text('$e'),
+                                                ))
+                                                    .toList(),
+                                                onChanged: (value) {
+                                                  selectedMinute = value!;
+                                                  setState(() {});
+
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                               Text('recipe_data.seconds'.tr()),
+                                              DropdownButton<int>(
+                                                dropdownColor:  theme.colorScheme.onSecondary,
+                                                value: selectedSecond,
+                                                items: List.generate(60, (index) => index)
+                                                    .map((e) => DropdownMenuItem(
+                                                  value: e,
+                                                  child: Text('$e',),
+                                                ))
+                                                    .toList(),
+                                                onChanged: (value) {
+                                                  selectedSecond = value!;
+                                                  setState(() {});
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, [selectedHour, selectedMinute, selectedSecond]);
+                                    },
+                                    child:  Text('recipe_data.ok'.tr()),
+                                  )
+                                ],
+                              ),
+                            );
+
+                            if (time != null) {
+                              final selectedTime = time as List<int>;
+                              vm.brewsTimeController.text =
+                              '${selectedTime[0]}h : ${selectedTime[1]}m : ${selectedTime[2]}s';
+                            }
+                          },
+                          child: AbsorbPointer(
+                            child: TextFormField(
+                              controller: vm.brewsTimeController,
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodyLarge,
+                              decoration: InputDecoration(
+                                hintText: "Enter time (hh:mm:ss)",
+                                contentPadding: const EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                  top: 15,
                                 ),
-                              ],
+                                hintStyle: theme.textTheme.bodyMedium,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    ],
                             ),
                             const Divider(
                               color: Colors.white60,
@@ -487,12 +587,19 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: TextFormField(
+                                    onTapOutside: (event) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                      decimal: true,
+                                    ),
                                     controller: vm.coffeeBeansController,
                                     textAlign: TextAlign.center,
                                     textInputAction: TextInputAction.done,
                                     style: theme.textTheme.bodyLarge,
                                     decoration: InputDecoration(
-                                      hintText: "Enter value",
+                                      hintText: "recipe_data.enter_value".tr(),
                                       contentPadding: const EdgeInsets.only(
                                           left: 10, right: 10, top: 15),
                                       hintStyle: theme.textTheme.bodyMedium,
@@ -518,11 +625,15 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                   water: double.parse(vm.waterController.text),
                                   ratio: "1: ${vm.ratioController.text}",
                                   // Todo: handle this issue
-                                  drewTime: timeFullFormat(
-                                    double.parse(vm.brewsTimeController.text)
-                                        .toInt()
-                                        .toString(),
-                                  ),
+                                  drewTime:
+                                  vm.brewsTimeController.text
+                                      .replaceAll("h", "")
+                                      .replaceAll("m", "")
+                                      .replaceAll("s", "")
+                                      .split(':')
+                                      .map((part) => int.tryParse(part.trim())?.toString().padLeft(2, '0') ?? "00")
+                                      .join(':'),
+
                                   // double.parse(vm.brewsTimeController.text),
                                   grinder: vm.grinderValue,
                                   coffeeBeans:
@@ -593,7 +704,7 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                                             0.2,
                                                       ),
                                                       Text(
-                                                        "Your edit was saved successfully",
+                                                        "recipe_data.your_recipe_updated_message".tr(),
                                                         textAlign:
                                                             TextAlign.center,
                                                         style: theme.textTheme
@@ -609,7 +720,7 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                                           height: mediaQuery
                                                                   .size.height *
                                                               0.054,
-                                                          title: "Done",
+                                                          title: "recipe_data.done".tr(),
                                                           color: theme
                                                               .colorScheme
                                                               .onSecondary,
@@ -652,7 +763,7 @@ class EditCoffeeDoseWidget extends StatelessWidget {
                                       );
                                     } else {
                                       SnackBarService.showErrorMessage(
-                                          "Somthing went wrong");
+                                          "recipe_data.something_went_wrong".tr());
                                     }
                                   },
                                 );

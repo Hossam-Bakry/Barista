@@ -9,7 +9,7 @@ class GetMyOwnRecipesUseCase {
 
   GetMyOwnRecipesUseCase(this._allRecipesRepository);
 
-  Future<Either<Failure, List<RecipeInfoEntity>>> excute() async {
-    return await _allRecipesRepository.getMyOwnRecipes();
+  Future<Either<Failure, List<RecipeInfoEntity>>> excute({ String? name}) async {
+    return await _allRecipesRepository.getMyOwnRecipes(name:name);
   }
 }

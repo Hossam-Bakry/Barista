@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:progress_state_button/progress_button.dart';
@@ -36,7 +37,7 @@ class ForgetPasswordView extends StatelessWidget {
           delay: const Duration(milliseconds: 200),
           child: SolidRoundedButton(
             animatedButton: false,
-            title: "Send",
+            title: "auth.send".tr(),
             state: ButtonState.idle,
             color: theme.primaryColor,
             textColor: theme.colorScheme.onSecondary,
@@ -72,14 +73,14 @@ class ForgetPasswordView extends StatelessWidget {
             FadeInRight(
               delay: const Duration(milliseconds: 50),
               child: Text(
-                "Barista",
+                "general.barista".tr(),
                 style: theme.textTheme.bodyLarge,
               ),
             ),
             FadeInRight(
               delay: const Duration(milliseconds: 100),
               child: Text(
-                "Forget \nPssword",
+                "auth.forget_password_title".tr(), //Forget \nPssword",
                 style: theme.textTheme.headlineLarge,
               ),
             ),
@@ -95,7 +96,7 @@ class ForgetPasswordView extends StatelessWidget {
             FadeInRight(
               delay: const Duration(milliseconds: 150),
               child: Text(
-                "Welcome to your comfort zone \nfor coffee !",
+                "auth.desc".tr(),
                 textAlign: TextAlign.start,
                 style: theme.textTheme.bodyLarge,
               ),
@@ -107,7 +108,7 @@ class ForgetPasswordView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "E-mail",
+                    "auth.email".tr(), //E-mail",
                     style: theme.textTheme.bodySmall!.copyWith(
                       color: theme.primaryColor,
                     ),
@@ -116,7 +117,7 @@ class ForgetPasswordView extends StatelessWidget {
                     width: mediaQuery.size.width * 0.8,
                     child: CustomTextField(
                       controller: _controller,
-                      hint: 'Enter your E-mail',
+                      hint: 'auth.enter_your_email'.tr(), //Enter your E-mail',
                       action: TextInputAction.next,
                     ),
                   ),

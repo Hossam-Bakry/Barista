@@ -5,9 +5,12 @@ class GetMyOwnRecipeDataSource {
 
   GetMyOwnRecipeDataSource(this._dio);
 
-  Future<Response> getMyOwnRecipeData() async {
+  Future<Response> getMyOwnRecipeData({String? name}) async {
     return await _dio.get(
       "api/v1/Coffee/recipe/user",
+      queryParameters: {
+        if(name != null) "name": name
+      }
     );
   }
 }

@@ -27,8 +27,17 @@ class Fcm {
   }
 
   static Future<String?> getToken() async {
-    String? token = await messaging.getToken();
-    debugPrint(token);
+    String? token;
+    try {
+      token = await messaging.getToken();
+    } catch (e) {
+      try {
+        token = await messaging.getAPNSToken();
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    }
+
     return token;
   }
 
@@ -37,16 +46,16 @@ class Fcm {
       'high_importance_channel', // id
       'High Importance Notifications', // title
       description:
-      'This channel is used for important notifications.', // description
+          'This channel is used for important notifications.', // description
       importance: Importance.max,
     );
 
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+        FlutterLocalNotificationsPlugin();
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {

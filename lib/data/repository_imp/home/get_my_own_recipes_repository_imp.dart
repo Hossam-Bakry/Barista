@@ -14,9 +14,9 @@ class GetMyOwnRecipesRepositoryImp extends GetMyOwnRecipesRepository {
   GetMyOwnRecipesRepositoryImp(this._allRecipesDataSource);
 
   @override
-  Future<Either<Failure, List<RecipeInfoEntity>>> getMyOwnRecipes() async {
+  Future<Either<Failure, List<RecipeInfoEntity>>> getMyOwnRecipes({String? name}) async {
     try {
-      var response = await _allRecipesDataSource.getMyOwnRecipeData();
+      var response = await _allRecipesDataSource.getMyOwnRecipeData(name:name);
 
       if (response.statusCode == 200 && response.data["status"] == "Success") {
         List<RecipeInfoEntity> list = [];

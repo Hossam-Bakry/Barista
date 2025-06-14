@@ -256,110 +256,110 @@ class _LoginViewState extends State<LoginView> {
                   context.locale == const Locale("en") ? 0.04 : 0.0,
                   context.locale == const Locale("en") ? 0.0 : 0.08),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        isScrollControlled: true,
-                        isDismissible: false,
-                        builder: (context) {
-                          return SizedBox(
-                            height: mediaQuery.size.height * 0.9,
-                            width: mediaQuery.size.width,
-                            child: InAppWebViewWidget(),
-                          );
-                        },
-                      ).then(
-                        (value) {
-                          navigatorKey.currentState?.pushNamedAndRemoveUntil(
-                            // PageRouteNames.brewPlay,
-                            PageRouteNames.home,
-                            (route) => false,
-                          );
-                        },
-                      );
-                    },
-                    child: const CircleAvatar(
-                      radius: 15,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          AssetImage("assets/icons/google_icn.png"),
-                    ),
-                  ),
-                  const CircleAvatar(
-                    radius: 15,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage:
-                        AssetImage("assets/icons/facebook_icn.png"),
-                  ),
-                  const CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage("assets/icons/apple_icn.png"),
-                  ),
-                ],
-              ).setOnlyPadding(context, 0.012, 0.012, 0.08, 0.08),
-              AnimatedContainer(
-                height: 155,
-                duration: const Duration(milliseconds: 1000),
-                child: Column(
-                  children: [
-                    const OrDivider(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    RippleAnimationTest(
-                      repeat: true,
-                      onPress: () {
-                        HapticFeedback.lightImpact();
-                        Future.delayed(const Duration(milliseconds: 500), () {
-                          provider.loginByBiometrics();
-                        });
-                      },
-                      color: Colors.grey.withOpacity(0.001),
-                      minRadius: 35,
-                      ripplesCount: 5,
-                      duration: const Duration(milliseconds: 800),
-                      size: const Size(55, 55),
-                      child: FadeIn(
-                        delay: const Duration(milliseconds: 1200),
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            // border: Border.all(
-                            //     color: Colors.black),
-                          ),
-                          child: Image.asset(
-                            "assets/images/icn_fingerprint_faceID.png",
-                            color: theme.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "auth.login_biometric".tr(),
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
-              ).setOnlyPadding(
-                  context,
-                  0.0,
-                  0.02,
-                  context.locale == const Locale("en") ? 0.08 : 0.08,
-                  context.locale == const Locale("en") ? 0.08 : 0.08),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     InkWell(
+              //       onTap: () async {
+              //         showModalBottomSheet(
+              //           context: context,
+              //           backgroundColor: Colors.transparent,
+              //           isScrollControlled: true,
+              //           isDismissible: false,
+              //           builder: (context) {
+              //             return SizedBox(
+              //               height: mediaQuery.size.height * 0.9,
+              //               width: mediaQuery.size.width,
+              //               child: InAppWebViewWidget(),
+              //             );
+              //           },
+              //         ).then(
+              //           (value) {
+              //             // navigatorKey.currentState?.pushNamedAndRemoveUntil(
+              //             //   // PageRouteNames.brewPlay,
+              //             //   PageRouteNames.home,
+              //             //   (route) => false,
+              //             // );
+              //           },
+              //         );
+              //       },
+              //       child: const CircleAvatar(
+              //         radius: 15,
+              //         backgroundColor: Colors.transparent,
+              //         backgroundImage:
+              //             AssetImage("assets/icons/google_icn.png"),
+              //       ),
+              //     ),
+              //     const CircleAvatar(
+              //       radius: 15,
+              //       backgroundColor: Colors.transparent,
+              //       backgroundImage:
+              //           AssetImage("assets/icons/facebook_icn.png"),
+              //     ),
+              //     const CircleAvatar(
+              //       radius: 16,
+              //       backgroundColor: Colors.transparent,
+              //       backgroundImage: AssetImage("assets/icons/apple_icn.png"),
+              //     ),
+              //   ],
+              // ).setOnlyPadding(context, 0.012, 0.012, 0.08, 0.08),
+              // AnimatedContainer(
+              //   height: 155,
+              //   duration: const Duration(milliseconds: 1000),
+              //   child: Column(
+              //     children: [
+              //       const OrDivider(),
+              //       const SizedBox(
+              //         height: 15,
+              //       ),
+              //       RippleAnimationTest(
+              //         repeat: true,
+              //         onPress: () {
+              //           HapticFeedback.lightImpact();
+              //           Future.delayed(const Duration(milliseconds: 500), () {
+              //             provider.loginByBiometrics();
+              //           });
+              //         },
+              //         color: Colors.grey.withOpacity(0.001),
+              //         minRadius: 35,
+              //         ripplesCount: 5,
+              //         duration: const Duration(milliseconds: 800),
+              //         size: const Size(55, 55),
+              //         child: FadeIn(
+              //           delay: const Duration(milliseconds: 1200),
+              //           child: Container(
+              //             padding: const EdgeInsets.all(5),
+              //             decoration: const BoxDecoration(
+              //               shape: BoxShape.circle,
+              //               // border: Border.all(
+              //               //     color: Colors.black),
+              //             ),
+              //             child: Image.asset(
+              //               "assets/images/icn_fingerprint_faceID.png",
+              //               color: theme.primaryColor,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         height: 10,
+              //       ),
+              //       Text(
+              //         "auth.login_biometric".tr(),
+              //         textAlign: TextAlign.center,
+              //         style: theme.textTheme.bodySmall?.copyWith(
+              //           fontSize: 14,
+              //           color: Colors.white70,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ).setOnlyPadding(
+              //     context,
+              //     0.0,
+              //     0.02,
+              //     context.locale == const Locale("en") ? 0.08 : 0.08,
+              //     context.locale == const Locale("en") ? 0.08 : 0.08),
               const Spacer(),
             ],
           );

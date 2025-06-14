@@ -10,9 +10,13 @@
     "register": "Register",
     "desc": "Welcome to your comfort \nzone for coffee !",
     "full_name": "Full",
+    "forget_password_title": "Forget \nPssword",
     "enter_your_name": "Enter your full name",
     "name_validation_message": "you must enter your name",
     "email": "E-mail",
+    "pls_enter_your_email": "Please provide here the mail that you got a code",
+    "verify_email": "enter_your_email",
+
     "enter_your_email": "Enter your E-mail",
     "email_validation_message": "you must enter your e-mail",
     "invalid_email": "Invalid E-mail",
@@ -26,14 +30,16 @@
     "forget_password": "Forget Password ?",
     "login_biometric": "Login using Biometric / Face ID",
     "success_login_message": "you are logged in successfully",
-    "or": "OR"
+    "or": "OR",
+    "send": "Send"
   },
   "home": {
     "barista_methods": "Barista Methods",
     "select_one": "Select a Guide to start",
     "prepare": "Prepare",
-    "own_recipe": "Own Recipe",
-    "profile": "Profile"
+    "own_recipe": "My Log",
+    "profile": "Profile",
+    "all": "All"
   },
   "recipe_data": {
     "brew_new_session": "New Brew Session",
@@ -41,7 +47,16 @@
     "select_coffee_beans": "Select Coffee Beans",
     "coffee_beans": "Coffee Beans",
     "gram": "g",
+    "your_recipe_updated_message": "Your edit was saved successfully",
+    "done": "Done",
+    "something_went_wrong": "Something went wrong, please try again",
+    "selected_time": "Selected Time",
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "hours": "hours",
+    "ok": "ok",
     "ml": "ml",
+
     "coffee": "Coffee",
     "water": "Water",
     "grinder": "Grinder",
@@ -52,6 +67,7 @@
     "ratio": "Ratio",
     "lock": "Lock",
     "unLock": "Unlock",
+    "enter_value": "Enter a value",
     "save_changes": "Save Changes",
     "click_to_change": "Click to change",
     "dialog_title_play": "Enjoining with your coffee",
@@ -77,7 +93,7 @@
     "dialog_desc_rate": "We have received your review, and we will take every think on your review in considration "
   },
   "my_own_recipe": {
-    "my_own_recipe": "My Own Recipe",
+    "my_own_recipe": "My Log",
     "coffee": "Coffee",
     "water": "Water",
     "grinder": "Grinder",
@@ -86,6 +102,7 @@
     "review_your_recipe": "Review the taste of your coffee",
     "brew_time": "Brew Time",
     "secs": "Secs",
+
     "rating": "Rating",
     "additional_info": "Additional Information about this coffee",
     "add_note": "Add Note .."

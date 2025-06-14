@@ -19,6 +19,10 @@
     "invalid_email": "بريد إلكتروني خاطئ",
     "password": "رمز المرور",
     "enter_your_password": "ادخل رقمك السري",
+    "forget_password_title": "نسيت كلمة المرور",
+    "pls_enter_your_email": "ادخل البريد الإلكتروني الخاص بك",
+    "verify_email": "تاكيد البريد الإلكتروني",
+
     "password_validation_message": "يجب عليك إدخال كلمة المرور الخاصة بك",
     "confirm_password": "تأكيد كلمة المرور",
     "enter_your_confirm_password": "أدخل تأكيد كلمة المرور الخاصة بك",
@@ -27,14 +31,17 @@
     "forget_password": "نسيت كلمة المرور ؟",
     "login_biometric": "تسجيل الدخول باستخدام البصمة / معرف الوجه",
     "success_login_message": "لقد قمت بتسجيل الدخول بنجاح",
-    "or": "أو"
+    "or": "أو",
+    "send": "ارسال"
   },
   "home": {
     "barista_methods": "طرق باريستا",
     "select_one": "حدد طريقة للبدء",
     "prepare": "تحضر",
-    "own_recipe": "الوصفة الخاصة",
-    "profile": "حسابي"
+    "own_recipe": "سجلاتي",
+    "profile": "حسابي",
+    "all": "الكل"
+
   },
   "recipe_data": {
     "brew_new_session": "جلسة مشروبات جديدة",
@@ -42,6 +49,14 @@
     "select_coffee_beans": "حدد حبوب البن",
     "gram": "جم",
     "ml": "مل",
+    "your_recipe_updated_message": "تم حفظ التعديلات بنجاح",
+    "done": "تم",
+    "something_went_wrong": "حدث خطأ ، يرجى المحاولة مرة اخرى",
+    "selected_time": "الوقت المحدد",
+    "seconds": "ثواني",
+    "minutes": "دقايق",
+    "hours": "ساعات",
+    "ok": "موافق",
     "coffee_beans": "حبوب البن",
     "coffee": "قهوة",
     "water": "مياه",
@@ -54,6 +69,7 @@
     "lock": "قفل",
     "unLock": "فتح",
     "save_changes": "حفظ",
+    "enter_value": "ادخل قيمة",
     "click_to_change": "اضغط للتغيير",
     "dialog_title_play": "استمتع بقهوتك",
     "dialog_desc_play": "تم إعداد وصفة القهوة الخاصة بك!",
@@ -72,12 +88,14 @@
     "rating": "تقييم",
     "add_note": "اضف ملاحظة ..",
     "send_rate": "إرسال",
+    "minute": "دقيقة",
+    "hours": "ساعات",
     "additional_information": "معلومات إضافية عن هذه القهوة",
     "dialog_title_rate": "شكرا لك، لمراجعتك",
     "dialog_desc_rate": "لقد تلقينا رأيك، وسنأخذ كل ما تفكر فيه بشأن مراجعتك بعين الاعتبار"
   },
   "my_own_recipe": {
-    "my_own_recipe": "وصفتي الخاصة",
+    "my_own_recipe": "سجلاتي",
     "coffee": "قهوة",
     "water": "مياه",
     "grinder": "الطحنة",

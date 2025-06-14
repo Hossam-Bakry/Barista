@@ -12,8 +12,19 @@ import '../../../../featuers/home/provider/home_provider.dart';
 import '../../../../main.dart';
 import '../widgets/my_own_recipe_item_loading.dart';
 
-class MyOwnRecipeView extends StatelessWidget {
+class MyOwnRecipeView extends StatefulWidget {
   const MyOwnRecipeView({super.key});
+
+  @override
+  State<MyOwnRecipeView> createState() => _MyOwnRecipeViewState();
+}
+
+class _MyOwnRecipeViewState extends State<MyOwnRecipeView> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<HomeProvider>(context, listen: false).getMyOwnRecipe();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +46,38 @@ class MyOwnRecipeView extends StatelessWidget {
                   style: theme.textTheme.titleLarge,
                 ),
               ),
+              DefaultTabController(
+                  length: vm.brewDevicesList.length + 1,
+                  child: TabBar(
+                    isScrollable: true,
+                    indicatorColor: theme.primaryColor,
+                    labelColor: theme.primaryColor,
+                    onTap: (value) {
+                      if (value == 0) {
+                        vm.getMyOwnRecipe();
+                      } else {
+                        vm.getMyOwnRecipe(
+                            name: vm.brewDevicesList[value-1].deviceName);
+                      }
+                    },
+                    indicatorPadding: EdgeInsets.zero,
+                    tabAlignment: TabAlignment.start,
+                    dividerColor: Colors.transparent,
+                    unselectedLabelColor: Colors.white,
+                    indicatorWeight: 3,
+                    tabs: [
+                      Tab(
+                        child: Text(
+                          "home.all".tr(),
+                        ),
+                      ),
+                      ...vm.brewDevicesList
+                          .map((e) => Tab(
+                                child: Text(e.deviceName),
+                              ))
+                          .toList(growable: false),
+                    ],
+                  )),
               if (vm.myOwnBrewDevicesList.isEmpty)
                 Lottie.asset(
                   "assets/icons/empty_icn.json",

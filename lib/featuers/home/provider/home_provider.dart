@@ -356,14 +356,14 @@ class HomeProvider extends ChangeNotifier {
     );
   }
 
-  Future<bool> getMyOwnRecipe() async {
+  Future<bool> getMyOwnRecipe({String? name}) async {
     _getMyOwnRecipeDataSource = GetMyOwnRecipeDataSource(_services.tokenDio);
     _getMyOwnRecipesRepository =
         GetMyOwnRecipesRepositoryImp(_getMyOwnRecipeDataSource);
     _getMyOwnRecipesUseCase =
         GetMyOwnRecipesUseCase(_getMyOwnRecipesRepository);
 
-    var result = await _getMyOwnRecipesUseCase.excute();
+    var result = await _getMyOwnRecipesUseCase.excute(name:name);
 
     return result.fold(
       (fail) {
@@ -372,6 +372,7 @@ class HomeProvider extends ChangeNotifier {
       },
       (data) {
         _myOwnBrewDevicesList = data;
+        notifyListeners();
         if (_myOwnBrewDevicesList.isNotEmpty) {
           _myOwnCoffee = data[_listViewSelectedIndex].coffee.toDouble();
           _myOwnWater = data[_listViewSelectedIndex].water.toDouble();
@@ -537,6 +538,19 @@ class HomeProvider extends ChangeNotifier {
     WebServices().lang = lang;
     notifyListeners();
   }
+
+
+  Future<void> selectTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: 0, minute: 0),
+    );
+    if (pickedTime != null) {
+      brewsTimeController.text =
+      '${pickedTime.hour}h : ${pickedTime.minute}m : 0s';
+    }
+  }
+
 
   logOut() {
     _services.setMobileToken(null);

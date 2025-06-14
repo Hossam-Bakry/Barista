@@ -46,6 +46,22 @@ class BrewMethodsDetailsView extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: false,
+          backgroundColor: theme.colorScheme.onSecondary,
+          leading: Bounceable(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              shadows: [
+                Shadow(
+                  color: theme.primaryColor,
+                  offset: const Offset(1, 0),
+                  blurRadius: 10,
+                ),
+              ],
+              color: theme.primaryColor,
+          ),),
           title: Row(
             children: [
               // Image.asset("assets/icons/device_icon.png"),
@@ -60,7 +76,7 @@ class BrewMethodsDetailsView extends StatelessWidget {
                   ),
                   Text(
                     "recipe_data.brew_new_session".tr(),
-                    style: theme.textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall
                   ),
                 ],
               )

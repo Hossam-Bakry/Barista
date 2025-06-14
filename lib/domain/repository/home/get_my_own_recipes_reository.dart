@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 import '../../entities/home/recipe_info_entity.dart';
 
 abstract class GetMyOwnRecipesRepository {
-  Future<Either<Failure, List<RecipeInfoEntity>>> getMyOwnRecipes();
+  Future<Either<Failure, List<RecipeInfoEntity>>> getMyOwnRecipes({String?name});
 }
